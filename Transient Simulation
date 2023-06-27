@@ -1,0 +1,72 @@
+from math import pi 
+
+pi_num = pi #assign pi integer to variable pi_num
+e_num = 2.718
+
+nominal_voltage = 5 #nominal voltage
+transient_voltage = 7 #transient voltage
+damping_interval = 0.2 #damping interval in seconds
+frequency = 5 #frequency of the wave in Hertz
+
+period = frequency / (2 * pi) #calculate the period of the wave in seconds
+voltage_delta = transient_voltage - nominal_voltage #Difference in transient voltage and nominal voltage
+
+t = 0 #current time tracker
+t_increment = 0.001 #time simulation resolution
+internal_t = 0 #internal time tracker
+current_voltage = 0 #current voltage tracker
+
+#------------------------------------------------------------------------------------------------------------------------
+
+while t < ((period - (2 * damping_interval)) / 2):
+    current_voltage = nominal_voltage
+    t = t + t_increment
+
+print(str(t) + " seconds")
+print(str(current_voltage) + " volts")
+
+internal_t = 0
+while (current_voltage > -transient_voltage):
+    current_voltage = (((nominal_voltage + transient_voltage) * (pow(e_num , -(internal_t / period)))) - transient_voltage)
+    internal_t = internal_t + t_increment
+    t = t + t_increment
+
+print(str(t) + " seconds")
+print(str(current_voltage) + " volts")
+
+internal_t = 0
+while (current_voltage < -nominal_voltage):
+    current_voltage = -(transient_voltage - ((1 * (pow(e_num , (internal_t / period)))) - 1))
+    internal_t = internal_t + t_increment
+    t = t + t_increment
+
+print(str(t) + " seconds")
+print(str(current_voltage) + " volts")
+
+internal_t = 0
+while (internal_t < (damping_interval / t_increment)):
+    internal_t = internal_t + t_increment
+    t = t + t_increment
+
+print(str(t) + " seconds")
+print(str(current_voltage) + " volts")
+
+internal_t = 0
+while (current_voltage < transient_voltage):
+    current_voltage = (current_voltage + ((1 * (pow(e_num , (internal_t / period)))) - 1))
+    internal_t = internal_t + t_increment
+    t = t + t_increment
+
+print(str(t) + " seconds")
+print(str(current_voltage) + " volts")
+
+internal_t = 0
+while (current_voltage > nominal_voltage):
+    current_voltage = ((transient_voltage - (1 * (pow(e_num , (internal_t / period))))))
+    internal_t = internal_t + t_increment
+    t = t + t_increment
+
+print(str(t) + " seconds")
+print(str(current_voltage) + " volts")
+
+print("Done!")
