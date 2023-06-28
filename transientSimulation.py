@@ -2,6 +2,7 @@ import math
 from math import sin
 from math import pi
 import matplotlib.pyplot as plt
+import constants
 
 import time
 
