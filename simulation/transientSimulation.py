@@ -1,31 +1,28 @@
 import math
 from math import cos
-from math import pi
-import matplotlib.pyplot as plt
-import simulation.constants as constants
-import simulation.translationLayer as translationLayer
+import constants
 
-nominal_voltage = 5 #nominal voltage of the wave
-transient_voltage = 10 #transient voltage of the wave
-voltage_ripple = 0.5 #voltage ripple in the wave at nominal voltage
-nominal_frequency = 3 #wave frequency
-transient_frequency = 1 #transient frequency
-switching_frequency = 2 #switching frequency
-aggression = 0.75 #arbitrary value to set the agression of the transient decay, zero equals no decay and one equals immediate decay
+nominal_voltage = constants.nominal_voltage
+transient_voltage = constants.transient_voltage
+voltage_ripple = constants.voltage_ripple
+nominal_frequency = constants.nominal_frequency
+transient_frequency = constants.transient_frequency
+switching_frequency = constants.switching_frequency
+aggression = constants.aggression
 
-num_of_phases = 3 #number of phases per wave module
-num_of_wave_modules = 3 #number of wave modules
-increment_resolution = 0.01 #resolution with which the wave module is generated, measured in radians
+num_of_phases = constants.num_of_phases
+num_of_wave_modules = constants.num_of_wave_modules
+increment_resolution = constants.increment_resolution
+
+nominal_angular_frequency = constants.nominal_angular_frequency
+transient_angular_frequency = constants.transient_angular_frequency
+switching_angular_frequency = constants.switching_angular_frequency
+
+nominal_period = constants.nominal_period
+transient_period = constants.transient_period
+switching_period = constants.switching_period
 
 storage = [] #list used for graph generation
-
-nominal_angular_frequency = nominal_frequency * (2 * pi) #calculate the period of the wave in radians
-transient_angular_frequency = transient_frequency * (2 * pi) #calculate the period of the transient in radians
-switching_angular_frequency = switching_frequency * (2 * pi) #calculate the period of the switching in radians
-
-nominal_period = 1 / nominal_frequency
-transient_period = 1 / transient_frequency
-switching_period = 1 / switching_frequency
 
 def calc_transient_decay(time): #calculate the decay of the transient according to a decay function
     decay_amplitude = transient_voltage * pow((1 - aggression) , time) #decay funtion, transient_voltage * (1-aggression)^x
@@ -61,8 +58,3 @@ def calc_wave(): #iterate calculating wave modules according to num_of_wave_segm
         int_nominal_wave_voltage = -int_nominal_wave_voltage
         polarity = -polarity
         int_num_of_wave_modules = int_num_of_wave_modules + 1
-
-calc_wave()
-
-plt.plot(storage)
-plt.show()
