@@ -6,13 +6,13 @@ import constants
 
 import time
 
-slope_multiplier = 0.1375 #arbitrary multiple to set the agression of the slope of the linear decay function
+slope_multiplier = 0.005 #arbitrary multiple to set the agression of the slope of the linear decay function
 increment_resolution = 0.1 #resolution with which the wave module is generated, measured in radians
-transient_wave_voltage = 3 #transient voltage of the wave
-nominal_wave_voltage = 1 #nominal voltage of the wave
-nominal_wave_voltage_ripple = 0.1 #voltage ripple in the wave at nominal voltage
+transient_wave_voltage = 100 #transient voltage of the wave
+nominal_wave_voltage = 20 #nominal voltage of the wave
+nominal_wave_voltage_ripple = 1 #voltage ripple in the wave at nominal voltage
 wave_frequency = 10 #wave frequency
-switching_frequency = 1 #switching frequency
+switching_frequency = 2 #switching frequency
 num_of_wave_modules = 10 #number of wave segments
 
 storage = [] #list used for graph generation
