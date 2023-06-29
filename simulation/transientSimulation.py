@@ -1,26 +1,26 @@
 import math
 from math import cos
-import constants
+import translationLayer
 
-nominal_voltage = constants.nominal_voltage
-transient_voltage = constants.transient_voltage
-voltage_ripple = constants.voltage_ripple
-nominal_frequency = constants.nominal_frequency
-transient_frequency = constants.transient_frequency
-switching_frequency = constants.switching_frequency
-aggression = constants.aggression
+nominal_voltage = translationLayer.nominal_voltage
+transient_voltage = translationLayer.transient_voltage
+voltage_ripple = translationLayer.voltage_ripple
+nominal_frequency = translationLayer.nominal_frequency
+transient_frequency = translationLayer.transient_frequency
+switching_frequency = translationLayer.switching_frequency
+aggression = translationLayer.aggression
 
-num_of_phases = constants.num_of_phases
-num_of_wave_modules = constants.num_of_wave_modules
-increment_resolution = constants.increment_resolution
+num_of_phases = translationLayer.num_of_phases
+num_of_wave_modules = translationLayer.num_of_wave_modules
+increment_resolution = translationLayer.increment_resolution
 
-nominal_angular_frequency = constants.nominal_angular_frequency
-transient_angular_frequency = constants.transient_angular_frequency
-switching_angular_frequency = constants.switching_angular_frequency
+nominal_angular_frequency = translationLayer.nominal_angular_frequency
+transient_angular_frequency = translationLayer.transient_angular_frequency
+switching_angular_frequency = translationLayer.switching_angular_frequency
 
-nominal_period = constants.nominal_period
-transient_period = constants.transient_period
-switching_period = constants.switching_period
+nominal_period = translationLayer.nominal_period
+transient_period = translationLayer.transient_period
+switching_period = translationLayer.switching_period
 
 storage = [] #list used for graph generation
 
