@@ -2,8 +2,8 @@ import math
 from math import cos
 from math import pi
 import matplotlib.pyplot as plt
-import constants
-import translationLayer
+import simulation.constants as constants
+import simulation.translationLayer as translationLayer
 
 nominal_voltage = 5 #nominal voltage of the wave
 transient_voltage = 10 #transient voltage of the wave
@@ -11,7 +11,7 @@ voltage_ripple = 0.5 #voltage ripple in the wave at nominal voltage
 nominal_frequency = 3 #wave frequency
 transient_frequency = 1 #transient frequency
 switching_frequency = 2 #switching frequency
-aggression = 0.7 #arbitrary value to set the agression of the transient decay, zero equals no decay and one equals immediate decay
+aggression = 0.75 #arbitrary value to set the agression of the transient decay, zero equals no decay and one equals immediate decay
 
 num_of_phases = 3 #number of phases per wave module
 num_of_wave_modules = 3 #number of wave modules
