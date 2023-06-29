@@ -8,11 +8,11 @@ voltage_ripple = translationLayer.voltage_ripple
 nominal_frequency = translationLayer.nominal_frequency
 transient_frequency = translationLayer.transient_frequency
 switching_frequency = translationLayer.switching_frequency
-aggression = translationLayer.aggression
+time_constant = translationLayer.time_constant
 
 num_of_phases = translationLayer.num_of_phases
-num_of_wave_modules = translationLayer.num_of_wave_modules
-increment_resolution = translationLayer.increment_resolution
+num_of_modules = translationLayer.num_of_modules
+resolution = translationLayer.resolution
 
 nominal_angular_frequency = translationLayer.nominal_angular_frequency
 transient_angular_frequency = translationLayer.transient_angular_frequency
@@ -25,7 +25,7 @@ switching_period = translationLayer.switching_period
 storage = [] #list used for graph generation
 
 def calc_transient_decay(time): #calculate the decay of the transient according to a decay function
-    decay_amplitude = transient_voltage * pow((1 - aggression) , time) #decay funtion, transient_voltage * (1-aggression)^x
+    decay_amplitude = transient_voltage * pow(e , -(time / time_constant)) #decay function, transient_voltage * e ^ -(x / time_constant)
     if (decay_amplitude > voltage_ripple):
         return decay_amplitude
     else: 
@@ -42,18 +42,18 @@ def calc_wave_module(offset , polarity): #iterate calculating the current wave a
         if (int_num_of_phases == 0):
             while (time < transient_period):
                 storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_frequency , time) + offset)
-                time = time + increment_resolution
+                time = time + resolution
         else:
             while (time < nominal_angular_frequency):
                 storage.append(calc_wave_amplitude(calc_transient_decay(int_num_of_phases) , nominal_frequency, time) + offset)  
-                time = time + increment_resolution   
+                time = time + resolution   
         int_num_of_phases = int_num_of_phases + 1
 
 def calc_wave(): #iterate calculating wave modules according to num_of_wave_segments
     int_nominal_wave_voltage = nominal_voltage
     polarity = 1
     int_num_of_wave_modules = 0
-    while(int_num_of_wave_modules < num_of_wave_modules):
+    while(int_num_of_wave_modules < num_of_modules):
         calc_wave_module(int_nominal_wave_voltage , polarity)
         int_nominal_wave_voltage = -int_nominal_wave_voltage
         polarity = -polarity
