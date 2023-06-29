@@ -9,19 +9,22 @@ import time
 
 nominal_voltage = 5 #nominal voltage of the wave
 transient_voltage = 10 #transient voltage of the wave
-voltage_ripple = 0.1 #voltage ripple in the wave at nominal voltage
-nominal_frequency = 10 #wave frequency
-transient_frequency = 0.5 #transient frequency
+voltage_ripple = 0.5 #voltage ripple in the wave at nominal voltage
+nominal_frequency = 2 #wave frequency
+transient_frequency = 1 #transient frequency
 switching_frequency = 2 #switching frequency
 
 num_of_phases = 3 #number of phases per wave module
 num_of_wave_modules = 3 #number of wave modules
-increment_resolution = 0.1 #resolution with which the wave module is generated, measured in radians
+increment_resolution = 0.001 #resolution with which the wave module is generated, measured in radians
 
 storage = [] #list used for graph generation
-nominal_period = nominal_frequency / (2 * pi) #calculate the period of the wave in radians
-transient_period = transient_frequency / (2 * pi) #calculate the period of the transient in radians
-switching_period = switching_frequency / (2 * pi) #calculate the period of the switching in radians
+nominal_angular_frequency = nominal_frequency * (2 * pi) #calculate the period of the wave in radians
+transient_angular_frequency = transient_frequency * (2 * pi) #calculate the period of the transient in radians
+switching_angular_frequency = switching_frequency * (2 * pi) #calculate the period of the switching in radians
+
+nominal_period = 1 / nominal_frequency
+transient_period = 1 / transient_frequency
 
 def calc_wave_amplitude(amplitude , frequency , time): #calculate the amplitude of the wave at a given time measured in radians
     current_amplitude = amplitude * math.cos(frequency * time)
@@ -32,11 +35,11 @@ def calc_wave_module(offset , polarity): #iterate calculating the current wave a
     while(int_num_of_phases < num_of_phases):
         time = 0
         if (int_num_of_phases == 0):
-            while (time < (transient_period / 2)):
+            while (time < transient_period):
                 storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_frequency , time) + offset)
                 time = time + increment_resolution
         else:
-            while (time < nominal_period):
+            while (time < nominal_angular_frequency):
                 storage.append(calc_wave_amplitude(voltage_ripple , nominal_frequency, time) + offset)  
                 time = time + increment_resolution   
         int_num_of_phases = int_num_of_phases + 1
