@@ -5,8 +5,6 @@ import matplotlib.pyplot as plt
 import constants
 import translationLayer
 
-import time
-
 nominal_voltage = 5 #nominal voltage of the wave
 transient_voltage = 10 #transient voltage of the wave
 voltage_ripple = 0.5 #voltage ripple in the wave at nominal voltage
@@ -20,12 +18,14 @@ num_of_wave_modules = 3 #number of wave modules
 increment_resolution = 0.01 #resolution with which the wave module is generated, measured in radians
 
 storage = [] #list used for graph generation
+
 nominal_angular_frequency = nominal_frequency * (2 * pi) #calculate the period of the wave in radians
 transient_angular_frequency = transient_frequency * (2 * pi) #calculate the period of the transient in radians
 switching_angular_frequency = switching_frequency * (2 * pi) #calculate the period of the switching in radians
 
 nominal_period = 1 / nominal_frequency
 transient_period = 1 / transient_frequency
+switching_period = 1 / switching_frequency
 
 def calc_transient_decay(time): #calculate the decay of the transient according to a decay function
     decay_amplitude = transient_voltage * pow((1 - aggression) , time) #decay funtion, transient_voltage * (1-aggression)^x
