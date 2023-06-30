@@ -7,12 +7,13 @@ beta = 1 / current_limit
 deadtime = beta * constants.capacitance * constants.nominal_voltage
 
 nominal_voltage = constants.nominal_voltage #5 #nominal voltage of the wave
-transient_voltage = 0 #10 #transient voltage of the wave
+transient_voltage = 0 #10 #transient voltage of the wave #--------------------------------------------------------------
 voltage_ripple = constants.voltage_ripple #0.5 #voltage ripple in the wave at nominal voltage
 nominal_frequency = constants.nominal_frequency #3 #wave frequency
 transient_frequency = 1 / deadtime #1 #transient frequency
 switching_frequency = constants.switching_frequency #2 #switching frequency
 time_constant = constants.resistance * constants.capacitance #0.75 #arbitrary value to set the agression of the transient decay, zero equals no decay and one equals immediate decay
+rise_time = 0 #-----------------------------------------------------------------
 
 nominal_angular_frequency = nominal_frequency * (2 * pi) #calculate the angular frequency of the wave in radians
 transient_angular_frequency = transient_frequency * (2 * pi) #calculate the angular frequency of the transient in radians

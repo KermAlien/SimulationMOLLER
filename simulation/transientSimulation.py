@@ -1,5 +1,4 @@
 import math
-from math import cos
 import translationLayer
 
 nominal_voltage = translationLayer.nominal_voltage
@@ -9,6 +8,7 @@ nominal_frequency = translationLayer.nominal_frequency
 transient_frequency = translationLayer.transient_frequency
 switching_frequency = translationLayer.switching_frequency
 time_constant = translationLayer.time_constant
+rise_time = translationLayer.rise_time #----------------------------------------------------
 
 num_of_phases = translationLayer.num_of_phases
 num_of_modules = translationLayer.num_of_modules
@@ -55,6 +55,10 @@ def calc_wave(): #iterate calculating wave modules according to num_of_wave_segm
     int_num_of_wave_modules = 0
     while(int_num_of_wave_modules < num_of_modules):
         calc_wave_module(int_nominal_wave_voltage , polarity)
+        int_rise_time = 0 #-----------------------------------------------------------------------
+        while (int_rise_time < rise_time): #------------------------------------------------------
+            storage.append(0) #-------------------------------------------------------------------
+            int_rise_time = int_rise_time + 1 #---------------------------------------------------
         int_nominal_wave_voltage = -int_nominal_wave_voltage
         polarity = -polarity
         int_num_of_wave_modules = int_num_of_wave_modules + 1
