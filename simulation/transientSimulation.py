@@ -16,6 +16,7 @@ radian_rise_time = translationLayer.radian_rise_time
 num_of_phases = translationLayer.num_of_phases
 num_of_modules = translationLayer.num_of_modules
 generation_resolution = translationLayer.generation_resolution
+time_resolution = translationLayer.time_resolution
 
 nominal_angular_frequency = translationLayer.nominal_angular_frequency
 transient_angular_frequency = translationLayer.transient_angular_frequency
