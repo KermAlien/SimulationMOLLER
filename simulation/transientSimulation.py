@@ -61,7 +61,7 @@ def calc_wave_module(offset , polarity): #calculate the current wave amplitude b
         else:
             while (time < (2 * pi)):
                 storage.append(calc_wave_amplitude(calc_transient_decay(time) , nominal_frequency, time) + offset)  
-                time = time + resolution   
+                time = time + resolution
         int_num_of_phases = int_num_of_phases + 1
 
 def calc_rise_time_module(polarity): #calculate the current voltage of the rise time linearly, argument boolean polarity

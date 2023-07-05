@@ -22,7 +22,7 @@ nominal_period = 1 / nominal_frequency #period of the wave, measured in seconds
 transient_period = 1 / transient_frequency #period of the transient, measured in seconds
 switching_period = 1 / switching_frequency #period of the switching, measured in seconds
 
-rise_time = 1 #0 #transient rise time, measured in seconds #-----------------------------------------------------------------
+rise_time = 0 #transient rise time, measured in seconds #-----------------------------------------------------------------
 radian_rise_time = rise_time * nominal_angular_frequency #transient rise time, converted to radians according to the nominal angular frequency
 
 num_of_phases = (switching_period - transient_period) / nominal_period #number of phases per wave module
