@@ -7,3 +7,4 @@ switching_frequency = 10 #switching frequency of the power circuitry, measured i
 
 num_of_modules = 3 #number of simulated voltage transistions
 resolution = 0.01 #resolution with which the wave is generated, measured in radians
+time_resolution = 0.75 #resolution for the x-axis on the graph, measured in seconds
