@@ -2,27 +2,27 @@ import math
 from math import pi
 import constants
 
-current_limit = constants.nominal_voltage / constants.resistance
-beta = 1 / current_limit
-deadtime = beta * constants.capacitance * constants.nominal_voltage
+current_limit = constants.nominal_voltage / constants.resistance #current limit of the crystal system, measured in amps
+beta = 1 / current_limit #coefficient of the formula T = (beta)cv, measured in amps
+deadtime = beta * constants.capacitance * constants.nominal_voltage #measurment deadtime, calculation for the formula T = (beta)cv, measured in seconds
 
-nominal_voltage = constants.nominal_voltage #5 #nominal voltage of the wave
-transient_voltage = 0 #10 #transient voltage of the wave #--------------------------------------------------------------
-voltage_ripple = constants.voltage_ripple #0.5 #voltage ripple in the wave at nominal voltage
-nominal_frequency = constants.nominal_frequency #3 #wave frequency
-transient_frequency = 1 / deadtime #1 #transient frequency
-switching_frequency = constants.switching_frequency #2 #switching frequency
-time_constant = constants.resistance * constants.capacitance #0.75 #arbitrary value to set the agression of the transient decay, zero equals no decay and one equals immediate decay
-rise_time = 0 #-----------------------------------------------------------------
+nominal_voltage = constants.nominal_voltage #nominal voltage of the wave, measured in volts
+transient_voltage = 0 #transient voltage of the wave, measured in volts #--------------------------------------------------------------
+voltage_ripple = constants.voltage_ripple #voltage ripple in the wave at nominal voltage, measured in volts
+nominal_frequency = constants.nominal_frequency #wave frequency, measured in hertz
+transient_frequency = 1 / deadtime #transient frequency, measured in hertz
+switching_frequency = constants.switching_frequency #switching frequency, measured in hertz
+time_constant = constants.resistance * constants.capacitance #value to determine the rate of transient decay, full decay occurs after five time constants, measured in seconds
+rise_time = 0 #transient rise time, measured in seconds #-----------------------------------------------------------------
 
-nominal_angular_frequency = nominal_frequency * (2 * pi) #calculate the angular frequency of the wave in radians
-transient_angular_frequency = transient_frequency * (2 * pi) #calculate the angular frequency of the transient in radians
-switching_angular_frequency = switching_frequency * (2 * pi) #calculate the angular frequency of the switching in radians
+nominal_angular_frequency = nominal_frequency * (2 * pi) #angular frequency of the wave, measured in radians
+transient_angular_frequency = transient_frequency * (2 * pi) #angular frequency of the transient, measured in radians
+switching_angular_frequency = switching_frequency * (2 * pi) #angular frequency of the switching, measured in radians
 
-nominal_period = 1 / nominal_frequency #calculate the period of the wave in radians
-transient_period = 1 / transient_frequency #calculate the period of the transient in radians
-switching_period = 1 / switching_frequency #calculate the period of the switching in radians
+nominal_period = 1 / nominal_frequency #period of the wave, measured in seconds
+transient_period = 1 / transient_frequency #period of the transient, measured in seconds
+switching_period = 1 / switching_frequency #period of the switching, measured in seconds
 
-num_of_phases = (switching_period - transient_period) / nominal_period #3 #number of phases per wave module
-num_of_modules = constants.num_of_modules #3 #number of wave modules
-resolution = constants.resolution #0.01 #resolution with which the wave module is generated, measured in radians
+num_of_phases = (switching_period - transient_period) / nominal_period #number of phases per wave module
+num_of_modules = constants.num_of_modules #number of wave modules
+resolution = constants.resolution #resolution with which the wave module is generated, measured in radians

@@ -1,9 +1,9 @@
-resistance = 0 #resistance of the RTP crystal
-capacitance = 0 #capacitance of the RTP crystal
-nominal_voltage = 0 #nominal voltage of the power circuitry
-nominal_frequency = 0 #nominal frequency of the power circuitry
-voltage_ripple = 0 #voltage ripple of the power circuitry
-switching_frequency = 0 #switching frequency of the power circuitry
+resistance = 5000000 #resistance of the RTP crystal, measured in ohms
+capacitance = 0.000000000002 #capacitance of the RTP crystal, measured in farads
+nominal_voltage = 3000 #nominal voltage of the power circuitry, meansured in volts
+nominal_frequency = 1920 #nominal frequency of the power circuitry, measured in hertz
+voltage_ripple = 5 #voltage ripple of the power circuitry, measured in volts
+switching_frequency = 10 #switching frequency of the power circuitry, measured in hertz
 
-num_of_modules = 0 #number of simulated voltage transistions
-resolution = 0 #resolution with which the wave is generated
+num_of_modules = 3 #number of simulated voltage transistions
+resolution = 0.01 #resolution with which the wave is generated, measured in radians
