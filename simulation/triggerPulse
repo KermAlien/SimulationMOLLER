@@ -35,4 +35,3 @@ def calc_trigger_module():
             trigger.append(0)
             int_low_counter = int_low_counter + 1
         int_num_of_modules = int_num_of_modules + 1
-    
