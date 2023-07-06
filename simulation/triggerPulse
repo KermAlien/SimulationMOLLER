@@ -1,2 +1,22 @@
-import constants
+import translationLayer
 
+trigger_radian_rise_time = translationLayer.trigger_radian_rise_time
+generation_resolution = translationLayer.generation_resolution
+trigger_nominal_voltage = translationLayer.trigger_nominal_voltage
+
+trigger = []
+
+def calc_rise_time_module(polarity): #calculate the current voltage of the rise time linearly, argument boolean polarity
+    num_of_steps = (trigger_radian_rise_time / generation_resolution)
+    delta_voltage_per_step = (trigger_nominal_voltage / num_of_steps)
+    int_num_of_steps = 0
+    while (int_num_of_steps < num_of_steps):
+        if (polarity == 1):
+            trigger.append(delta_voltage_per_step * int_num_of_steps)
+        else:
+            trigger.append(trigger_nominal_voltage - (delta_voltage_per_step * int_num_of_steps))
+        int_num_of_steps = int_num_of_steps + 1
+
+def calc_trigger_module():
+    calc_rise_time_module(1)
+    
