@@ -1,10 +1,10 @@
 import translationLayer
 import transientSimulation
-import triggerPulse
+#import triggerPulse
 import matplotlib.pyplot as plt
 
 storage = transientSimulation.storage
-trigger = triggerPulse.trigger
+#trigger = triggerPulse.trigger
 
 generation_resolution = translationLayer.generation_resolution
 time_resolution = translationLayer.time_resolution
@@ -23,7 +23,7 @@ def set_time_resolution(): #sets the time resolution for the x-axis of the graph
 
 transientSimulation.calc_wave()
 plt.plot(storage)
-triggerPulse.calc_trigger_module()
-plt.plot(trigger)
+#triggerPulse.calc_trigger_module()
+#plt.plot(trigger)
 #set_time_resolution()
 plt.show()
