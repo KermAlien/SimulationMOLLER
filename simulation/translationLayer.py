@@ -28,10 +28,13 @@ transient_radian_rise_time = transient_rise_time * nominal_angular_frequency #tr
 
 #trigger pulse:
 trigger_duty_cycle = constants.trigger_duty_cycle
-trigger_latency = constants.trigger_latency
+trigger_latency = constants.trigger_latency #--TEMP-------------------------------------------------------
 trigger_nominal_voltage = constants.trigger_nominal_voltage
-trigger_rise_time = constants.trigger_rise_time
+trigger_rise_time = constants.trigger_rise_time #--TEMP--------------------------------------------------------
 trigger_radian_rise_time = trigger_rise_time * nominal_angular_frequency
+
+#systematic error:
+percent_error = constants.percent_error
 
 #general:
 num_of_phases = (switching_period - transient_period) / nominal_period #number of phases per wave module
