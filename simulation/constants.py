@@ -6,13 +6,16 @@ nominal_frequency = 25 #1920 #nominal frequency of the power circuitry, measured
 voltage_ripple = 5 #voltage ripple of the power circuitry, measured in volts
 switching_frequency = 10 #switching frequency of the power circuitry, measured in hertz
 
+#trigger pulse:
+trigger_rise_time = 0
+trigger_duty_cycle = 0
+trigger_latency = 0
+
+#general:
 num_of_modules = 3 #number of simulated voltage transistions
 generation_resolution = 0.01 #resolution with which the wave is generated, measured in radians
 time_resolution = 0.25 #resolution for the x-axis on the graph, measured in seconds
 
-#trigger pulse:
-
-
 #temp:
 transient_voltage = 25
-rise_time = 0.01
+transient_rise_time = 0.01

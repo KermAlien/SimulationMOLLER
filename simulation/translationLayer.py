@@ -2,6 +2,7 @@ import math
 from math import pi
 import constants
 
+#transient simulation:
 current_limit = constants.nominal_voltage / constants.resistance #current limit of the crystal system, measured in amps
 beta = 1 / current_limit #coefficient of the formula T = (beta)cv, measured in amps
 deadtime = beta * constants.capacitance * constants.nominal_voltage #measurment deadtime, calculation for the formula T = (beta)cv, measured in seconds
@@ -22,9 +23,13 @@ nominal_period = 1 / nominal_frequency #period of the wave, measured in seconds
 transient_period = 1 / transient_frequency #period of the transient, measured in seconds
 switching_period = 1 / switching_frequency #period of the switching, measured in seconds
 
-rise_time = constants.rise_time #transient rise time, measured in seconds #--TEMP---------------------------------------------------------------
-radian_rise_time = rise_time * nominal_angular_frequency #transient rise time, converted to radians according to the nominal angular frequency
+transient_rise_time = constants.transient_rise_time #transient rise time, measured in seconds #--TEMP---------------------------------------------------------------
+transient_radian_rise_time = transient_rise_time * nominal_angular_frequency #transient rise time, converted to radians according to the nominal angular frequency
 
+#trigger pulse:
+trigger_radian_rise_time = 0
+
+#general:
 num_of_phases = (switching_period - transient_period) / nominal_period #number of phases per wave module
 num_of_modules = constants.num_of_modules #number of wave modules
 generation_resolution = constants.generation_resolution #resolution with which the wave module is generated, measured in radians

@@ -10,8 +10,8 @@ transient_frequency = translationLayer.transient_frequency
 switching_frequency = translationLayer.switching_frequency
 time_constant = translationLayer.time_constant
 
-rise_time = translationLayer.rise_time
-radian_rise_time = translationLayer.radian_rise_time
+transient_rise_time = translationLayer.transient_rise_time
+transient_radian_rise_time = translationLayer.transient_radian_rise_time
 
 num_of_phases = translationLayer.num_of_phases
 num_of_modules = translationLayer.num_of_modules
@@ -66,7 +66,7 @@ def calc_wave_module(offset , polarity): #calculate the current wave amplitude b
         int_num_of_phases = int_num_of_phases + 1
 
 def calc_rise_time_module(polarity): #calculate the current voltage of the rise time linearly, argument boolean polarity
-    num_of_steps = (radian_rise_time / generation_resolution)
+    num_of_steps = (transient_radian_rise_time / generation_resolution)
     delta_voltage = (nominal_voltage + transient_voltage)
     delta_voltage_per_step = (delta_voltage / num_of_steps)
     int_num_of_steps = 0
