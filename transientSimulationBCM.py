@@ -57,7 +57,7 @@ def calc_wave_module(offset , polarity): #calculate the current wave amplitude b
     while(int_num_of_phases < num_of_phases):
         time = 0
         if (int_num_of_phases == 0):
-            while (time < calc_wave_intersection(nominal_voltage)):
+            while (time < calc_wave_intersection(nominal_voltage)): # type: ignore
                 storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_frequency , time) + offset)
                 time = time + BCM_resolution
         else:
