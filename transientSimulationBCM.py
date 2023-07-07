@@ -31,7 +31,8 @@ e = 2.7182818284590452353602874713527 #e constant
 storage = [] #list used for graph generation
 
 def calc_transient_decay(time): #calculate the amplitude of the decay of the transient at a given time according to a decay function, argument time in radians, returns amplitude in volts
-    decay_amplitude = transient_voltage * pow(e , -(time / time_constant)) #decay function, transient_voltage * e ^ -(x / time_constant)
+    seconds_from_radians = time * (1 / nominal_angular_frequency)
+    decay_amplitude = transient_voltage * (1 / pow(e , (seconds_from_radians / time_constant))) #decay function, transient_voltage * e ^ -(x / time_constant)
     if (decay_amplitude > voltage_ripple):
         return decay_amplitude
     else: 
@@ -83,7 +84,7 @@ def calc_wave(): #iterate calculating wave modules according to num_of_wave_segm
     int_num_of_wave_modules = 0
     while(int_num_of_wave_modules < num_of_modules):
         calc_wave_module(int_nominal_wave_voltage , polarity)
-        calc_rise_time_module(polarity)
+        # calc_rise_time_module(polarity)
         int_nominal_wave_voltage = -int_nominal_wave_voltage
         polarity = -polarity
         int_num_of_wave_modules = int_num_of_wave_modules + 1
