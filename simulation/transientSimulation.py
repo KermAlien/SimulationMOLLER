@@ -16,7 +16,7 @@ transient_radian_rise_time = translationLayer.transient_radian_rise_time
 num_of_phases = translationLayer.num_of_phases
 num_of_modules = translationLayer.num_of_modules
 generation_resolution = translationLayer.generation_resolution
-time_resolution = translationLayer.time_resolution
+time_resolution = translationLayer.graph_time_scale
 
 nominal_period = translationLayer.nominal_period
 transient_period = translationLayer.transient_period
@@ -31,8 +31,12 @@ e = 2.7182818284590452353602874713527 #e constant
 storage = [] #list used for graph generation
 
 def calc_transient_decay(time): #calculate the amplitude of the decay of the transient at a given time according to a decay function, argument time in radians, returns amplitude in volts
-    decay_amplitude = transient_voltage * pow(e , -(time / time_constant)) #decay function, transient_voltage * e ^ -(x / time_constant)
-    if (decay_amplitude > voltage_ripple):
+    seconds_from_radians = time * (1 / nominal_angular_frequency)
+    #print(seconds_from_radians)
+    #print(time_constant)
+    decay_amplitude = transient_voltage * pow(e , -(seconds_from_radians / time_constant)) #decay function, transient_voltage * e ^ -(x / time_constant)
+    print(pow(e , -(seconds_from_radians / time_constant)))
+    if (decay_amplitude > voltage_ripple):    
         return decay_amplitude
     else: 
         return voltage_ripple
@@ -87,3 +91,5 @@ def calc_wave(): #iterate calculating wave modules according to num_of_wave_segm
         int_nominal_wave_voltage = -int_nominal_wave_voltage
         polarity = -polarity
         int_num_of_wave_modules = int_num_of_wave_modules + 1
+
+calc_transient_decay(10000)

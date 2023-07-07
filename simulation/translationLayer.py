@@ -40,4 +40,4 @@ percent_error = constants.percent_error
 num_of_phases = (switching_period - transient_period) / nominal_period #number of phases per wave module
 num_of_modules = constants.num_of_modules #number of wave modules
 generation_resolution = constants.generation_resolution #resolution with which the wave module is generated, measured in radians
-time_resolution = constants.time_resolution #resolution for the x-axis on the graph, measured in seconds
+graph_time_scale = constants.graph_time_scale #resolution for the x-axis on the graph, measured in seconds

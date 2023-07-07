@@ -1,5 +1,5 @@
 #transient simulation:
-resistance = 730000000 #resistance of the RTP crystal, measured in ohms
+resistance = 730000000000 #resistance of the RTP crystal, measured in ohms
 capacitance = 0.000000000000006 #capacitance of the RTP crystal, measured in farads
 nominal_voltage = 3000 #nominal voltage of the power circuitry, meansured in volts
 nominal_frequency = 500000 #100000 #nominal frequency of the power circuitry, measured in hertz
@@ -20,5 +20,5 @@ percent_error = 0
 
 #general:
 num_of_modules = 3 #number of simulated voltage transistions
-generation_resolution = 0.1 #resolution with which the wave is generated, measured in radians
-time_resolution = 0.25 #resolution for the x-axis on the graph, measured in seconds
+generation_resolution = 0.5 #resolution with which the wave is generated, measured in radians
+graph_time_scale = 0.25 #resolution for the x-axis on the graph, measured in seconds
