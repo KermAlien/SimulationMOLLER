@@ -15,7 +15,7 @@ transient_radian_rise_time = translationLayer.transient_radian_rise_time
 
 num_of_phases = translationLayer.num_of_phases
 num_of_modules = translationLayer.num_of_modules
-generation_resolution = translationLayer.generation_resolution
+BCM_resolution = translationLayer.BCM_resolution
 time_resolution = translationLayer.time_resolution
 
 nominal_angular_frequency = translationLayer.nominal_angular_frequency
@@ -47,7 +47,7 @@ def calc_wave_intersection(amplitude): #calculate the time in radians that the t
     while(1):
         current_amplitude = calc_wave_amplitude(transient_voltage , transient_frequency , time)
         if (current_amplitude > (amplitude + acceptable_error)):
-            time = time + generation_resolution
+            time = time + BCM_resolution
         else:
             return time
 
@@ -58,15 +58,15 @@ def calc_wave_module(offset , polarity): #calculate the current wave amplitude b
         if (int_num_of_phases == 0):
             while (time < calc_wave_intersection(nominal_voltage)):
                 storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_frequency , time) + offset)
-                time = time + generation_resolution
+                time = time + BCM_resolution
         else:
             while (time < (2 * pi)):
-                storage.append(calc_wave_amplitude(calc_transient_decay(time) , nominal_frequency, time) + offset)  
-                time = time + generation_resolution
+                storage.append(calc_wave_amplitude(calc_transient_decay(time) , nominal_frequency, time) + offset)
+                time = time + BCM_resolution
         int_num_of_phases = int_num_of_phases + 1
 
 def calc_rise_time_module(polarity): #calculate the current voltage of the rise time linearly, argument boolean polarity
-    num_of_steps = (transient_radian_rise_time / generation_resolution)
+    num_of_steps = (transient_radian_rise_time / BCM_resolution)
     delta_voltage = (nominal_voltage + transient_voltage)
     delta_voltage_per_step = (delta_voltage / num_of_steps)
     int_num_of_steps = 0
