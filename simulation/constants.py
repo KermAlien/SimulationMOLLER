@@ -1,6 +1,6 @@
 #transient simulation:
 resistance = 730000000000 #resistance of the RTP crystal, measured in ohms
-capacitance = 0.000000000000006 #capacitance of the RTP crystal, measured in farads
+capacitance = 0.0000000000000006 #capacitance of the RTP crystal, measured in farads
 nominal_voltage = 3000 #nominal voltage of the power circuitry, meansured in volts
 nominal_frequency = 500000 #100000 #nominal frequency of the power circuitry, measured in hertz
 voltage_ripple = 600 #voltage ripple of the power circuitry, measured in volts
