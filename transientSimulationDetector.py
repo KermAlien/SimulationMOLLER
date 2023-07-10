@@ -32,10 +32,13 @@ storage = [] #list used for graph generation
 
 def calc_transient_decay(time): #calculate the amplitude of the decay of the transient at a given time according to a decay function, argument time in radians, returns amplitude in volts
     seconds_from_radians = time * (1 / nominal_angular_frequency)
-    decay_amplitude = transient_voltage * pow(e , -(seconds_from_radians / time_constant)) #decay function, transient_voltage * (1 / e ^ (x / time_constant))
-    if (decay_amplitude > voltage_ripple):
+    #print(seconds_from_radians)
+    #print(time_constant)
+    decay_amplitude = transient_voltage * pow(10000 , -(seconds_from_radians / time_constant)) #decay function, transient_voltage * e ^ -(x / time_constant), change the base to adjust the aggression of the decay
+    print(pow(10000 , -(seconds_from_radians / time_constant)))
+    if (decay_amplitude > voltage_ripple):    
         return decay_amplitude
-    else:
+    else: 
         return voltage_ripple
 
 def calc_wave_amplitude(amplitude , frequency , time): #calculate the amplitude of the wave at a given time, argument amplitude in volts, frequency in hertz, time in radians, returns amplitude in volts
