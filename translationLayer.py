@@ -3,13 +3,13 @@ from math import pi
 import constants
 
 #transient simulation:
-deadtime = 10 #measurment deadtime, calculation for the formula t = (beta)cv, measured in microseconds
+deadtime = 10.2 #measurment deadtime
 
 nominal_voltage = constants.nominal_voltage #nominal voltage of the wave, measured in volts
 transient_voltage = constants.transient_voltage #transient voltage of the wave, measured in volts #--TEMP------------------------------------------------------------
 voltage_ripple = constants.voltage_ripple #voltage ripple in the wave at nominal voltage, measured in volts
 nominal_frequency = constants.nominal_frequency #wave frequency, measured in hertz
-transient_frequency = 98039 #transient frequency, measured in hertz
+transient_frequency = constants.transient_frequency #transient frequency, measured in hertz
 switching_frequency = constants.switching_frequency #switching frequency, measured in hertz
 time_constant = constants.resistance * constants.capacitance #value to determine the rate of transient decay, full decay occurs after five time constants, measured in seconds
 
@@ -31,7 +31,8 @@ trigger_radian_rise_time = 0
 num_of_phases = (switching_period - transient_period) / nominal_period #number of phases per wave module
 num_of_modules = constants.num_of_modules #number of wave modules
 
-detector_resolution = constants.detector_resolution
-BCM_resolution = constants.BCM_resolution
+generation_resolution = constants.generation_resolution
+detector_period = 1 / constants.detector_resolution
+BCM_period = 1 / constants.BCM_resolution
 
 time_resolution = constants.time_resolution #resolution for the x-axis on the graph, measured in seconds

@@ -15,7 +15,7 @@ transient_radian_rise_time = translationLayer.transient_radian_rise_time
 
 num_of_phases = translationLayer.num_of_phases
 num_of_modules = translationLayer.num_of_modules
-detector_resolution = translationLayer.detector_resolution
+generation_resolution = translationLayer.generation_resolution
 time_resolution = translationLayer.time_resolution
 
 nominal_angular_frequency = translationLayer.nominal_angular_frequency
@@ -26,19 +26,16 @@ nominal_period = translationLayer.nominal_period
 transient_period = translationLayer.transient_period
 switching_period = translationLayer.switching_period
 
-e = 10000 #e constant
+e = 2.7182818284590452353602874713527 #e constant
 
 storage = [] #list used for graph generation
 
 def calc_transient_decay(time): #calculate the amplitude of the decay of the transient at a given time according to a decay function, argument time in radians, returns amplitude in volts
     seconds_from_radians = time * (1 / nominal_angular_frequency)
-    #print(seconds_from_radians)
-    #print(time_constant)
-    decay_amplitude = transient_voltage * pow(10000 , -(seconds_from_radians / time_constant)) #decay function, transient_voltage * e ^ -(x / time_constant), change the base to adjust the aggression of the decay
-    print(pow(10000 , -(seconds_from_radians / time_constant)))
-    if (decay_amplitude > voltage_ripple):    
+    decay_amplitude = transient_voltage * pow(e , -(seconds_from_radians / time_constant)) #decay function, transient_voltage * e ^ -(x / time_constant), change the base to adjust the aggression of the decay
+    if (decay_amplitude > voltage_ripple):
         return decay_amplitude
-    else: 
+    else:
         return voltage_ripple
 
 def calc_wave_amplitude(amplitude , frequency , time): #calculate the amplitude of the wave at a given time, argument amplitude in volts, frequency in hertz, time in radians, returns amplitude in volts
@@ -51,26 +48,26 @@ def calc_wave_intersection(amplitude): #calculate the time in radians that the t
     while(1):
         current_amplitude = calc_wave_amplitude(transient_voltage , transient_frequency , time)
         if (current_amplitude > (amplitude + acceptable_error)):
-            time = time + detector_resolution
+            time = time + generation_resolution
         else:
             return time
 
 def calc_wave_module(offset , polarity): #calculate the current wave amplitude between switching occurances with a given resolution according to increment_resolution, argument offset measured in volts, boolean polarity 
     int_num_of_phases = 0
-    while(int_num_of_phases < num_of_phases):
+    while(int_num_of_phases < num_of_phases / 2):
         time = 0
         if (int_num_of_phases == 0):
             while (time < calc_wave_intersection(nominal_voltage)): # type: ignore
                 storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_frequency , time) + offset)
-                time = time + detector_resolution
+                time = time + generation_resolution
         else:
             while (time < (2 * pi)):
                 storage.append(calc_wave_amplitude(calc_transient_decay(time), nominal_frequency, time) + offset)
-                time = time + detector_resolution
+                time = time + generation_resolution
         int_num_of_phases = int_num_of_phases + 1
 
 def calc_rise_time_module(polarity): #calculate the current voltage of the rise time linearly, argument boolean polarity
-    num_of_steps = (transient_radian_rise_time / detector_resolution)
+    num_of_steps = (transient_radian_rise_time / generation_resolution)
     delta_voltage = (nominal_voltage + transient_voltage)
     delta_voltage_per_step = (delta_voltage / num_of_steps)
     int_num_of_steps = 0
