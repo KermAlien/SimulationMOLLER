@@ -26,13 +26,13 @@ nominal_period = translationLayer.nominal_period
 transient_period = translationLayer.transient_period
 switching_period = translationLayer.switching_period
 
-e = 2.7182818284590452353602874713527 #e constant
+e = 10000 #e constant
 
 storage = [] #list used for graph generation
 
 def calc_transient_decay(time): #calculate the amplitude of the decay of the transient at a given time according to a decay function, argument time in radians, returns amplitude in volts
     seconds_from_radians = time * (1 / nominal_angular_frequency)
-    decay_amplitude = transient_voltage * (1 / pow(e , (seconds_from_radians / time_constant))) #decay function, transient_voltage * (1 / e ^ (x / time_constant))
+    decay_amplitude = transient_voltage * pow(e , -(seconds_from_radians / time_constant)) #decay function, transient_voltage * (1 / e ^ (x / time_constant))
     if (decay_amplitude > voltage_ripple):
         return decay_amplitude
     else:
