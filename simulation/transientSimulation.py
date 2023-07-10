@@ -34,7 +34,7 @@ def calc_transient_decay(time): #calculate the amplitude of the decay of the tra
     seconds_from_radians = time * (1 / nominal_angular_frequency)
     #print(seconds_from_radians)
     #print(time_constant)
-    decay_amplitude = transient_voltage * pow(10000 , -(seconds_from_radians / time_constant)) #decay function, transient_voltage * e ^ -(x / time_constant)
+    decay_amplitude = transient_voltage * pow(10000 , -(seconds_from_radians / time_constant)) #decay function, transient_voltage * e ^ -(x / time_constant), change the base to adjust the aggression of the decay
     print(pow(10000 , -(seconds_from_radians / time_constant)))
     if (decay_amplitude > voltage_ripple):    
         return decay_amplitude
@@ -64,7 +64,7 @@ def calc_wave_module(offset , polarity): #calculate the current wave amplitude b
                 storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_frequency , time) + offset)
                 time = time + generation_resolution
         else:
-            while (time < (200 * pi)):
+            while (time < (200 * pi)): #change the pi scalar to adjust the decay time
                 storage.append(calc_wave_amplitude(calc_transient_decay(time) , nominal_frequency, time) + offset)  
                 time = time + generation_resolution
         int_num_of_phases = int_num_of_phases + 1
