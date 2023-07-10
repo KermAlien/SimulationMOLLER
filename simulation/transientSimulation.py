@@ -26,16 +26,13 @@ nominal_angular_frequency = translationLayer.nominal_angular_frequency
 transient_angular_frequency = translationLayer.transient_angular_frequency
 switching_angular_frequency = translationLayer.switching_angular_frequency
 
-e = 2.7182818284590452353602874713527 #e constant
+#e = 2.7182818284590452353602874713527 #e constant
 
 storage = [] #list used for graph generation
 
 def calc_transient_decay(time): #calculate the amplitude of the decay of the transient at a given time according to a decay function, argument time in radians, returns amplitude in volts
     seconds_from_radians = time * (1 / nominal_angular_frequency)
-    #print(seconds_from_radians)
-    #print(time_constant)
     decay_amplitude = transient_voltage * pow(10000 , -(seconds_from_radians / time_constant)) #decay function, transient_voltage * e ^ -(x / time_constant), change the base to adjust the aggression of the decay
-    print(pow(10000 , -(seconds_from_radians / time_constant)))
     if (decay_amplitude > voltage_ripple):    
         return decay_amplitude
     else: 
@@ -56,18 +53,14 @@ def calc_wave_intersection(amplitude): #calculate the time in radians that the t
             return time
 
 def calc_wave_module(offset , polarity): #calculate the current wave amplitude between switching occurances with a given resolution according to increment_resolution, argument offset measured in volts, boolean polarity 
-    int_num_of_phases = 0
-    while(int_num_of_phases < num_of_phases / 200):
         time = 0
-        if (int_num_of_phases == 0):
-            while (time < calc_wave_intersection(nominal_voltage)):
-                storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_frequency , time) + offset)
-                time = time + generation_resolution
-        else:
-            while (time < (200 * pi)): #change the pi scalar to adjust the decay time
-                storage.append(calc_wave_amplitude(calc_transient_decay(time) , nominal_frequency, time) + offset)  
-                time = time + generation_resolution
-        int_num_of_phases = int_num_of_phases + 1
+        while (time < calc_wave_intersection(nominal_voltage)):
+            storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_frequency , time) + offset)
+            time = time + generation_resolution
+        time = 0
+        while (time < (num_of_phases * (2 * pi))):
+            storage.append(calc_wave_amplitude(calc_transient_decay(time) , nominal_frequency, time) + offset)  
+            time = time + generation_resolution
 
 def calc_rise_time_module(polarity): #calculate the current voltage of the rise time linearly, argument boolean polarity
     num_of_steps = (transient_radian_rise_time / generation_resolution)
@@ -87,9 +80,7 @@ def calc_wave(): #iterate calculating wave modules according to num_of_wave_segm
     int_num_of_wave_modules = 0
     while(int_num_of_wave_modules < num_of_modules):
         calc_wave_module(int_nominal_wave_voltage , polarity)
-        #calc_rise_time_module(polarity)
+        calc_rise_time_module(polarity)
         int_nominal_wave_voltage = -int_nominal_wave_voltage
         polarity = -polarity
         int_num_of_wave_modules = int_num_of_wave_modules + 1
-
-calc_transient_decay(10000)
