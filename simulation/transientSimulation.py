@@ -43,8 +43,8 @@ def calc_wave_amplitude(amplitude , frequency , time): #calculate the amplitude 
     return current_amplitude
 
 def calc_wave_intersection(amplitude): #calculate the time in radians that the transient wave equals a given amplitude, argument amplitude in volts, returns time in radians
-    time = (pi / 2)
-    acceptable_error = 0.1 #acceptable error between current amplitude and target amplitude in amplitude calculation, measured in volts
+    time = 0
+    acceptable_error = (0.01 * amplitude) #acceptable error between current amplitude and target amplitude in amplitude calculation, measured in volts
     while(1):
         current_amplitude = calc_wave_amplitude(transient_voltage , transient_frequency , time)
         if (current_amplitude > (amplitude + acceptable_error)):

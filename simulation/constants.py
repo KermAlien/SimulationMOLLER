@@ -20,5 +20,6 @@ percent_error = 0
 
 #general:
 num_of_modules = 3 #number of simulated voltage transistions
-generation_resolution = 0.1 #resolution with which the wave is generated, measured in radians
+generation_resolution = 0.0001 #resolution with which the wave is generated, measured in radians
 graph_time_scale = 0.25 #resolution for the x-axis on the graph, measured in seconds
+graph_time_interval = 0.1 #interval for the x-axis on the graph, measured in seconds
