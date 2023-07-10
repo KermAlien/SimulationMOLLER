@@ -53,18 +53,14 @@ def calc_wave_intersection(amplitude): #calculate the time in radians that the t
             return time
 
 def calc_wave_module(offset , polarity): #calculate the current wave amplitude between switching occurances with a given resolution according to increment_resolution, argument offset measured in volts, boolean polarity 
-    int_num_of_phases = 0
-    while(int_num_of_phases < num_of_phases / 2):
         time = 0
-        if (int_num_of_phases == 0):
-            while (time < calc_wave_intersection(nominal_voltage)): # type: ignore
-                storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_frequency , time) + offset)
-                time = time + generation_resolution
-        else:
-            while (time < (2 * pi)):
-                storage.append(calc_wave_amplitude(calc_transient_decay(time), nominal_frequency, time) + offset)
-                time = time + generation_resolution
-        int_num_of_phases = int_num_of_phases + 1
+        while (time < calc_wave_intersection(nominal_voltage)): # type: ignore
+            storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_frequency , time) + offset)
+            time = time + generation_resolution
+        time = 0
+        while (time < (num_of_phases * (2 * pi))):
+            storage.append(calc_wave_amplitude(calc_transient_decay(time) , nominal_frequency, time) + offset)  
+            time = time + generation_resolution
 
 def calc_rise_time_module(polarity): #calculate the current voltage of the rise time linearly, argument boolean polarity
     num_of_steps = (transient_radian_rise_time / generation_resolution)
@@ -81,10 +77,11 @@ def calc_rise_time_module(polarity): #calculate the current voltage of the rise 
 def calc_wave(): #iterate calculating wave modules according to num_of_wave_segments
     int_nominal_wave_voltage = nominal_voltage
     polarity = 1
-    int_num_of_wave_modules = 0
-    while(int_num_of_wave_modules < num_of_modules):
+    int_num_of_modules = 0
+    while(int_num_of_modules < num_of_modules):
         calc_wave_module(int_nominal_wave_voltage , polarity)
-        # calc_rise_time_module(polarity)
+        if (int_num_of_modules < (num_of_modules - 1)):
+            calc_rise_time_module(polarity)
         int_nominal_wave_voltage = -int_nominal_wave_voltage
         polarity = -polarity
-        int_num_of_wave_modules = int_num_of_wave_modules + 1
+        int_num_of_modules = int_num_of_modules + 1
