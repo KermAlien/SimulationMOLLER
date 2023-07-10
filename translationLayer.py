@@ -3,8 +3,6 @@ from math import pi
 import constants
 
 #transient simulation:
-deadtime = 10.2 #measurment deadtime
-
 nominal_voltage = constants.nominal_voltage #nominal voltage of the wave, measured in volts
 transient_voltage = constants.transient_voltage #transient voltage of the wave, measured in volts #--TEMP------------------------------------------------------------
 voltage_ripple = constants.voltage_ripple #voltage ripple in the wave at nominal voltage, measured in volts
@@ -20,9 +18,6 @@ switching_angular_frequency = switching_frequency * (2 * pi) #angular frequency 
 nominal_period = (1 / nominal_frequency) #period of the wave, measured in seconds
 transient_period = (1 / transient_frequency) #period of the transient, measured in seconds
 switching_period = (1 / switching_frequency) #period of the switching, measured in seconds
-
-transient_rise_time = constants.transient_rise_time #transient rise time, measured in microseconds #--TEMP---------------------------------------------------------------
-transient_radian_rise_time = transient_rise_time * nominal_angular_frequency #transient rise time, converted to radians according to the nominal angular frequency
 
 #trigger pulse:
 trigger_radian_rise_time = 0
