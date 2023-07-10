@@ -42,3 +42,5 @@ num_of_modules = constants.num_of_modules #number of wave modules
 generation_resolution = constants.generation_resolution #resolution with which the wave module is generated, measured in radians
 graph_time_scale = constants.graph_time_scale #resolution for the x-axis on the graph, measured in seconds
 graph_time_interval = constants.graph_time_interval #interval for the x-axis on the graph, measured in seconds
+
+#need to change frequency for angular frequency in wave calculations
