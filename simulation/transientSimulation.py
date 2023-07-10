@@ -77,10 +77,11 @@ def calc_rise_time_module(polarity): #calculate the current voltage of the rise 
 def calc_wave(): #iterate calculating wave modules according to num_of_wave_segments
     int_nominal_wave_voltage = nominal_voltage
     polarity = 1
-    int_num_of_wave_modules = 0
-    while(int_num_of_wave_modules < num_of_modules):
+    int_num_of_modules = 0
+    while(int_num_of_modules < num_of_modules):
         calc_wave_module(int_nominal_wave_voltage , polarity)
-        calc_rise_time_module(polarity)
+        if (int_num_of_modules < (num_of_modules - 1)):
+            calc_rise_time_module(polarity)
         int_nominal_wave_voltage = -int_nominal_wave_voltage
         polarity = -polarity
-        int_num_of_wave_modules = int_num_of_wave_modules + 1
+        int_num_of_modules = int_num_of_modules + 1
