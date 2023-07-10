@@ -28,7 +28,7 @@ switching_period = translationLayer.switching_period
 
 e = 2.7182818284590452353602874713527 #e constant
 
-storage = [] #list used for graph generation
+storage = [] #list used for data storage
 
 def calc_transient_decay(time): #calculate the amplitude of the decay of the transient at a given time according to a decay function, argument time in radians, returns amplitude in volts
     seconds_from_radians = time * (1 / nominal_angular_frequency)

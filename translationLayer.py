@@ -31,8 +31,8 @@ trigger_radian_rise_time = 0
 num_of_phases = (switching_period - transient_period) / nominal_period #number of phases per wave module
 num_of_modules = constants.num_of_modules #number of wave modules
 
-generation_resolution = constants.generation_resolution
-detector_period = 1 / constants.detector_resolution
-BCM_period = 1 / constants.BCM_resolution
+generation_resolution = constants.generation_resolution #resolution with which the wave is generated, measured in radians
+detector_period = 1 / constants.detector_resolution #period with which the wave is "measured" by the detector, measured in seconds
+BCM_period = 1 / constants.BCM_resolution #period with which the wave is "measured" by the BCM, measured in seconds
 
 time_resolution = constants.time_resolution #resolution for the x-axis on the graph, measured in seconds
