@@ -45,17 +45,18 @@ def calc_wave_intersection(amplitude): #calculate the time in radians that the t
     time1 = 0
     acceptable_error = 30 #acceptable error between current amplitude and target amplitude in amplitude calculation, measured in volts
     while(1):
-        current_amplitude = calc_wave_amplitude(transient_voltage , transient_frequency , time1)
+        current_amplitude = calc_wave_amplitude(transient_voltage , transient_angular_frequency / 2 , time1)
         if (current_amplitude > (amplitude + acceptable_error)):
             time1 = time1 + generation_resolution
         else:
             return time1
 def calc_wave_module(offset , polarity): #calculate the current wave amplitude between switching occurances with a given resolution according to increment_resolution, argument offset measured in volts, boolean polarity 
     time2 = 0
+    global timer
     while (time2 < calc_wave_intersection(nominal_voltage)): # type: ignore
         
         if (timer_lower_bound < timer < timer_upper_bound):
-            storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_angular_frequency , time2) + offset)
+            storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_angular_frequency / 2 , time2) + offset)
             time2 = time2 + generation_resolution
             timer = timer + generation_resolution
         else:
@@ -75,13 +76,14 @@ def calc_wave_module(offset , polarity): #calculate the current wave amplitude b
 
 def calc_rise_time_module(offset , polarity): #calculate the current voltage of the rise time linearly, argument boolean polarity
     time4 = 0
+    global timer
     while (time4 < num_of_modules - 1):
         
         if (timer_lower_bound < timer < timer_upper_bound):
             if (polarity == 1):
-                storage.append(calc_wave_amplitude(nominal_voltage , transient_angular_frequency , time4))
+                storage.append(calc_wave_amplitude(transient_voltage , transient_angular_frequency / 2 , time4) + offset)
             else:
-                storage.append(calc_wave_amplitude(- nominal_voltage , transient_angular_frequency , time4))
+                storage.append(calc_wave_amplitude(-transient_voltage , transient_angular_frequency / 2 , time4) + offset)
             time4 = time4 + generation_resolution
             timer = timer + generation_resolution
         else:
