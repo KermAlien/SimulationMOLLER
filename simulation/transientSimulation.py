@@ -16,7 +16,7 @@ transient_radian_rise_time = translationLayer.transient_radian_rise_time
 num_of_phases = translationLayer.num_of_phases
 num_of_modules = translationLayer.num_of_modules
 generation_resolution = translationLayer.generation_resolution
-time_resolution = translationLayer.graph_time_scale
+graph_time_interval = translationLayer.graph_time_interval
 
 nominal_period = translationLayer.nominal_period
 transient_period = translationLayer.transient_period
@@ -47,18 +47,18 @@ def calc_wave_intersection(amplitude): #calculate the time in radians that the t
     acceptable_error = (0.01 * amplitude) #acceptable error between current amplitude and target amplitude in amplitude calculation, measured in volts
     current_amplitude = transient_voltage
     while(current_amplitude > (amplitude + acceptable_error)):
-        current_amplitude = calc_wave_amplitude(transient_voltage , transient_frequency , time)
+        current_amplitude = calc_wave_amplitude(transient_voltage , transient_angular_frequency , time)
         time = time + generation_resolution
     return time
 
 def calc_wave_module(offset , polarity): #calculate the current wave amplitude between switching occurances with a given resolution according to increment_resolution, argument offset measured in volts, boolean polarity 
         time = 0
         while (time < calc_wave_intersection(nominal_voltage)):
-            storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_frequency , time) + offset)
+            storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_angular_frequency , time) + offset)
             time = time + generation_resolution
         time = 0
         while (time < (num_of_phases * (2 * pi))):
-            storage.append(calc_wave_amplitude(calc_transient_decay(time) , nominal_frequency, time) + offset)  
+            storage.append(calc_wave_amplitude(calc_transient_decay(time) , nominal_angular_frequency, time) + offset)
             time = time + generation_resolution
 
 def calc_rise_time_module(polarity): #calculate the current voltage of the rise time linearly, argument boolean polarity
