@@ -31,3 +31,7 @@ detector_period = 1 / constants.detector_resolution #period with which the wave 
 BCM_period = 1 / constants.BCM_resolution #period with which the wave is "measured" by the BCM, measured in seconds
 
 time_resolution = constants.time_resolution #resolution for the x-axis on the graph, measured in seconds
+
+#timer
+timer_lower_bound = constants.timer_lower_bound
+timer_upper_bound = constants.timer_upper_bound

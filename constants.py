@@ -23,3 +23,7 @@ detector_resolution = 100000 #resolution with which the wave is "measured" by th
 #temp:
 transient_frequency = 98039 #transient frequency, measured in hertz
 transient_voltage = 11400 #volts
+
+#timer
+timer_lower_bound = 12000
+timer_upper_bound = 24000
