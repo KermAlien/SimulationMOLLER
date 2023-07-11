@@ -4,13 +4,13 @@ import samplingSimulation
 import matplotlib.pyplot as plt
 
 transientSimulation.calc_wave()
-samplingSimulation.calc_wave_detector()
-samplingSimulation.calc_wave_BCM()
+# samplingSimulation.calc_wave_detector()
+# samplingSimulation.calc_wave_BCM()
 
-BCM_storage = samplingSimulation.BCM_storage
-detector_storage = samplingSimulation.detector_storage
-interval_d = samplingSimulation.interval_d
-interval_b = samplingSimulation.interval_b
+# BCM_storage = samplingSimulation.BCM_storage
+# detector_storage = samplingSimulation.detector_storage
+# interval_d = samplingSimulation.interval_d
+# interval_b = samplingSimulation.interval_b
 
 storage = transientSimulation.storage
 

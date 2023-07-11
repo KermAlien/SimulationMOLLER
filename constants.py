@@ -15,7 +15,8 @@ trigger_latency = 0
 #general:
 num_of_modules = 2 #number of simulated voltage transistions
 time_resolution = 1 #resolution for the x-axis on the graph, measured in microseconds
-generation_resolution = 0.000001 #resolution with which the wave is generated, measured in radians
+transient_resolution = 0.0001 #resolution with which the transient wave is generated, measured in radians
+nominal_resolution = 0.001 #resolution with which the nominal wave is generated, measured in radians
 
 BCM_resolution = 1000 #resolution with which the wave is "measured" by the BCM, measured in hertz
 detector_resolution = 100000 #resolution with which the wave is "measured" by the detector, measured in hertz
@@ -25,5 +26,5 @@ transient_frequency = 98039 #transient frequency, measured in hertz
 transient_voltage = 11400 #volts
 
 #timer
-timer_lower_bound = 1605.201575
-timer_upper_bound = 1605.202725
+timer_lower_bound = 1070
+timer_upper_bound = 1075
