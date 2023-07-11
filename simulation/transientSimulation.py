@@ -84,3 +84,5 @@ def calc_wave(): #iterate calculating wave modules according to num_of_wave_segm
         int_nominal_wave_voltage = -int_nominal_wave_voltage
         polarity = -polarity
         int_num_of_modules = int_num_of_modules + 1
+
+#change wave amplitude calculations to use angular frequency instead of frequency
