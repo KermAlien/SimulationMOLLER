@@ -10,7 +10,8 @@ voltage_ripple_positive = translationLayer.voltage_ripple_positive
 voltage_ripple_negative = translationLayer.voltage_ripple_negative
 transient_voltage_positive = translationLayer.transient_voltage_positive
 transient_voltage_negative = translationLayer.transient_voltage_negative
-transient_frequency = translationLayer.transient_frequency
+transient_frequency_positive = translationLayer.transient_frequency_positive
+transient_frequency_negative = translationLayer.transient_frequency_negative
 switching_frequency = translationLayer.switching_frequency
 time_constant = translationLayer.time_constant
 
@@ -26,12 +27,14 @@ graph_time_interval = translationLayer.graph_time_interval
 
 nominal_period_positive = translationLayer.nominal_period_positive
 nominal_period_negative = translationLayer.nominal_period_negative
-transient_period = translationLayer.transient_period
+transient_period_positive = translationLayer.transient_period_positive
+transient_period_negative = translationLayer.transient_period_negative
 switching_period = translationLayer.switching_period
 
 nominal_angular_frequency_positive = translationLayer.nominal_angular_frequency_positive 
 nominal_angular_frequency_negative = translationLayer.nominal_angular_frequency_negative
-transient_angular_frequency = translationLayer.transient_angular_frequency
+transient_angular_frequency_positive = translationLayer.transient_angular_frequency_positive
+transient_angular_frequency_negative = translationLayer.transient_angular_frequency_negative
 switching_angular_frequency = translationLayer.switching_angular_frequency
 
 storage = [] #list used for graph generation
@@ -62,13 +65,13 @@ def calc_wave_intersection(amplitude , polarity): #calculate the time in radians
     if (polarity == 1):
         current_amplitude = transient_voltage_positive
         while(current_amplitude > (amplitude + acceptable_error)):
-            current_amplitude = calc_wave_amplitude(transient_voltage_positive , transient_angular_frequency , time)
+            current_amplitude = calc_wave_amplitude(transient_voltage_positive , transient_angular_frequency_positive , time)
             time = time + generation_resolution
         return time
     else: 
         current_amplitude = transient_voltage_negative
         while(current_amplitude > (amplitude + acceptable_error)):
-            current_amplitude = calc_wave_amplitude(transient_voltage_negative , transient_angular_frequency , time)
+            current_amplitude = calc_wave_amplitude(transient_voltage_negative , transient_angular_frequency_negative , time)
             time = time + generation_resolution
         return time
 
@@ -76,7 +79,7 @@ def calc_wave_module(offset , polarity): #calculate the current wave amplitude b
     time = 0
     if (polarity == 1):
         while (time < calc_wave_intersection(nominal_voltage_positive , polarity)):
-            storage.append(polarity * calc_wave_amplitude(transient_voltage_positive , transient_angular_frequency , time) + offset)
+            storage.append(polarity * calc_wave_amplitude(transient_voltage_positive , transient_angular_frequency_positive , time) + offset)
             time = time + generation_resolution
         time = 0
         while (time < (num_of_phases_positive * (2 * pi))):
@@ -84,7 +87,7 @@ def calc_wave_module(offset , polarity): #calculate the current wave amplitude b
             time = time + generation_resolution
     else: 
         while (time < calc_wave_intersection(nominal_voltage_negative , polarity)):
-            storage.append(polarity * calc_wave_amplitude(transient_voltage_negative , transient_angular_frequency , time) + offset)
+            storage.append(polarity * calc_wave_amplitude(transient_voltage_negative , transient_angular_frequency_negative , time) + offset)
             time = time + generation_resolution
         time = 0
         while (time < (num_of_phases_negative * (2 * pi))):
@@ -124,3 +127,5 @@ def calc_wave(): #iterate calculating wave modules according to num_of_modules
         int_num_of_modules = int_num_of_modules + 1
 
 #change num_of_phase * 2 * pi conditional to fix uneven compression
+#same problem with transient frequency, compression
+#weird spike following first transient
