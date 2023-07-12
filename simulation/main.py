@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 
 storage = transientSimulation.storage
 
-switching_period = translationLayer.switching_period
 nominal_angular_frequency_positive = translationLayer.nominal_angular_frequency_positive
 nominal_angular_frequency_negative = translationLayer.nominal_angular_frequency_negative
+switching_period = translationLayer.switching_period
 transient_rise_time_positive = translationLayer.transient_rise_time_positive
 transient_rise_time_negative = translationLayer.transient_rise_time_negative
 num_of_modules = translationLayer.num_of_modules
@@ -38,3 +38,5 @@ transientSimulation.calc_wave()
 plt.plot(storage)
 set_time_resolution(graph_time_interval)
 plt.show()
+
+#not sure if set_time_resolution() is setting an accurate time scale
