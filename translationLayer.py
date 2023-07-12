@@ -9,7 +9,6 @@ voltage_ripple = constants.voltage_ripple #voltage ripple in the wave at nominal
 nominal_frequency = constants.nominal_frequency #wave frequency, measured in hertz
 transient_frequency = constants.transient_frequency #transient frequency, measured in hertz
 switching_frequency = constants.switching_frequency #switching frequency, measured in hertz
-time_constant = constants.resistance * constants.capacitance #value to determine the rate of transient decay, full decay occurs after five time constants, measured in seconds
 
 nominal_angular_frequency = nominal_frequency * (2 * pi) #angular frequency of the wave, measured in radians
 transient_angular_frequency = transient_frequency * (2 * pi) #angular frequency of the transient, measured in radians
@@ -37,5 +36,3 @@ time_resolution = constants.time_resolution #resolution for the x-axis on the gr
 #timer
 timer_lower_bound = constants.timer_lower_bound
 timer_upper_bound = constants.timer_upper_bound
-
-print(num_of_phases)

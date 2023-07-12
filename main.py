@@ -1,3 +1,4 @@
+import constants
 import translationLayer
 import transientSimulation
 import samplingSimulation
@@ -14,6 +15,7 @@ transientSimulation.calc_wave()
 
 storage = transientSimulation.storage
 
+generation_resolution = constants.generation_resolution
 time_resolution = translationLayer.time_resolution
 nominal_angular_frequency = translationLayer.nominal_angular_frequency
 
@@ -51,5 +53,18 @@ nominal_angular_frequency = translationLayer.nominal_angular_frequency
 # axs[1].set_title('BCM')
 
 # plt.show()
+
+
+
+# tick_location = [] #list to store the x-axis tick locations on the graph
+# tick_label = [] #list to store the x-axis tick labels on the graph
+# num_of_microseconds = ((len(storage) * generation_resolution) / nominal_angular_frequency)
+# int_num_of_microseconds = 0
+# while (int_num_of_microseconds < (num_of_microseconds + generation_resolution)):
+#     tick_location.append(int_num_of_microseconds * (len(storage) / num_of_microseconds))
+#     tick_label.append(int_num_of_microseconds)
+#     int_num_of_microseconds = int_num_of_microseconds + time_resolution
+# plt.xticks(tick_location , tick_label)
+
 plt.plot(storage)
 plt.show()
