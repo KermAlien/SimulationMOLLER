@@ -31,9 +31,10 @@ transient_angular_frequency_positive = int(transient_frequency_positive * (2 * p
 transient_angular_frequency_negative = int(transient_frequency_negative * (2 * pi)) #negative angular frequency of the transient, measured in radians
 switching_angular_frequency = int(switching_frequency * (2 * pi)) #angular frequency of the switching, measured in radians
 
-transient_rise_time = constants.transient_rise_time #transient rise time, measured in seconds
-transient_radian_rise_time_positive = transient_rise_time * nominal_angular_frequency_positive #positive transient rise time, converted to radians according to the nominal angular frequency
-transient_radian_rise_time_negative = transient_rise_time * nominal_angular_frequency_negative #negative transient rise time, converted to radians according to the nominal angular frequency
+transient_rise_time_positive = constants.transient_rise_time_positive #positve transient rise time, measured in seconds
+transient_rise_time_negative = constants.transient_rise_time_negative #negative transient rise time, measured in seconds
+transient_radian_rise_time_positive = transient_rise_time_positive * nominal_angular_frequency_positive #positive transient rise time, converted to radians according to the nominal angular frequency
+transient_radian_rise_time_negative = transient_rise_time_negative * nominal_angular_frequency_negative #negative transient rise time, converted to radians according to the nominal angular frequency
 
 #trigger pulse:
 #trigger_duty_cycle = constants.trigger_duty_cycle

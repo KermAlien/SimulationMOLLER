@@ -15,7 +15,8 @@ transient_frequency_negative = translationLayer.transient_frequency_negative
 switching_frequency = translationLayer.switching_frequency
 time_constant = translationLayer.time_constant
 
-transient_rise_time = translationLayer.transient_rise_time
+transient_rise_time_positive = translationLayer.transient_rise_time_positive
+transient_rise_time_negative = translationLayer.transient_rise_time_negative
 transient_radian_rise_time_positive = translationLayer.transient_radian_rise_time_positive
 transient_radian_rise_time_negative = translationLayer.transient_radian_rise_time_negative
 

@@ -11,8 +11,8 @@ transient_voltage_positive = 14400 #voltage of the transient, measured in volts
 transient_voltage_negative = 14400 #voltage of the transient, measured in volts
 transient_frequency_positive = 28114 #positive frequency of the transient, measured in hertz
 transient_frequency_negative = 28114 #negative frequency of the transient, measured in hertz
-transient_rise_time = 0.00000025 #period of the transient rise time, measured in seconds
-#transient_rise_time_negative = 0.00000025 #period of the transient rise time, measured in seconds
+transient_rise_time_positive = 0.00000025 #positive period of the transient rise time, measured in seconds
+transient_rise_time_negative = 0.00000025 #negative period of the transient rise time, measured in seconds
 switching_frequency = 1920 #switching frequency of the power circuitry, measured in hertz
 
 #trigger pulse:
