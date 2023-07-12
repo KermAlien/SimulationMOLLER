@@ -15,7 +15,6 @@ transientSimulation.calc_wave()
 
 storage = transientSimulation.storage
 
-generation_resolution = constants.generation_resolution
 time_resolution = translationLayer.time_resolution
 nominal_angular_frequency = translationLayer.nominal_angular_frequency
 

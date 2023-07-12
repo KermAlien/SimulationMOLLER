@@ -29,7 +29,10 @@ time2 = 0
 
 def calc_wave_amplitude(amplitude , frequency , time): #calculate the amplitude of the wave at a given time, argument amplitude in volts, frequency in hertz, time in radians, returns amplitude in volts
     current_amplitude = amplitude * math.cos(frequency * time)
-    # print(current_amplitude)
+    return current_amplitude
+
+def calc_wave_amplitude_rt(amplitude , frequency , time): #calculate the amplitude of the wave at a given time, argument amplitude in volts, frequency in hertz, time in radians, returns amplitude in volts
+    current_amplitude = -amplitude * math.cos(frequency * time + (pi / 2)) - 3000
     return current_amplitude
 
 def calc_wave_intersection(amplitude): #calculate the time in radians that the transient wave equals a given amplitude, argument amplitude in volts, returns time in radians
@@ -48,7 +51,7 @@ def calc_wave_module(offset , polarity): #calculate the current wave amplitude b
     global timer
     while (time2 < calc_wave_intersection(nominal_voltage)): # type: ignore
         if (timer_lower_bound < timer < timer_upper_bound):
-            storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_angular_frequency / 2 , time2) + offset)
+            storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_angular_frequency / 2 , time2))
             time2 = time2 + transient_resolution
             timer = timer + transient_resolution
         else:
@@ -71,7 +74,7 @@ def calc_rise_time_module(offset , polarity): #calculate the current voltage of 
     global timer
     while (time4 < time2):
         if (timer_lower_bound < timer < timer_upper_bound):
-            storage.append(-polarity * calc_wave_amplitude(transient_voltage , transient_angular_frequency / 2 , time4) - offset)
+            storage.append(-polarity * calc_wave_amplitude_rt(17800 , transient_angular_frequency / 2 , time4))
             time4 = time4 + transient_resolution
             timer = timer + transient_resolution
         else:
@@ -85,7 +88,6 @@ def calc_wave(): #iterate calculating wave modules according to num_of_wave_segm
     while(int_num_of_modules < num_of_modules):
         calc_wave_module(int_nominal_wave_voltage , polarity)
         calc_rise_time_module(int_nominal_wave_voltage , polarity)
-        # calc_wave_module(int_nominal_wave_voltage , polarity)
         int_nominal_wave_voltage = -int_nominal_wave_voltage
         polarity = -polarity
         int_num_of_modules = int_num_of_modules + 1
