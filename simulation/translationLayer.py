@@ -6,7 +6,8 @@ import constants
 resistance = constants.resistance
 capacitance = constants.capacitance
 
-nominal_voltage = constants.nominal_voltage #nominal voltage of the wave, measured in volts
+nominal_voltage_positve = constants.nominal_voltage_positve #positive nominal voltage of the wave, measured in volts
+nominal_voltage_negative = constants.nominal_voltage_negative #negative nominal voltage of the wave, measured in volts
 nominal_frequency = constants.nominal_frequency #wave frequency, measured in hertz
 voltage_ripple = constants.voltage_ripple #voltage ripple in the wave at nominal voltage, measured in volts
 transient_voltage = constants.transient_voltage #transient voltage of the wave, measured in volts

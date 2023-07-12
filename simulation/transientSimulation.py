@@ -2,7 +2,8 @@ import math
 from math import pi
 import translationLayer
 
-nominal_voltage = translationLayer.nominal_voltage
+nominal_voltage_positive = translationLayer.nominal_voltage_positve
+nominal_voltage_negative = translationLayer.nominal_voltage_negative
 nominal_frequency = translationLayer.nominal_frequency
 voltage_ripple = translationLayer.voltage_ripple
 transient_voltage = translationLayer.transient_voltage
@@ -25,8 +26,6 @@ switching_period = translationLayer.switching_period
 nominal_angular_frequency = translationLayer.nominal_angular_frequency
 transient_angular_frequency = translationLayer.transient_angular_frequency
 switching_angular_frequency = translationLayer.switching_angular_frequency
-
-#e = 2.7182818284590452353602874713527 #e constant
 
 storage = [] #list used for graph generation
 
@@ -52,8 +51,17 @@ def calc_wave_intersection(amplitude): #calculate the time in radians that the t
     return time
 
 def calc_wave_module(offset , polarity): #calculate the current wave amplitude between switching occurances with a given resolution according to increment_resolution, argument offset measured in volts, boolean polarity 
+    time = 0
+    if (polarity == 1):
+        while (time < calc_wave_intersection(nominal_voltage_positive)):
+            storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_angular_frequency , time) + offset)
+            time = time + generation_resolution
         time = 0
-        while (time < calc_wave_intersection(nominal_voltage)):
+        while (time < (num_of_phases * (2 * pi))):
+            storage.append(calc_wave_amplitude(calc_transient_decay(time) , nominal_angular_frequency, time) + offset)
+            time = time + generation_resolution
+    else: 
+        while (time < calc_wave_intersection(nominal_voltage_negative)):
             storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_angular_frequency , time) + offset)
             time = time + generation_resolution
         time = 0
@@ -63,24 +71,31 @@ def calc_wave_module(offset , polarity): #calculate the current wave amplitude b
 
 def calc_rise_time_module(polarity): #calculate the current voltage of the rise time linearly, argument boolean polarity
     num_of_steps = (transient_radian_rise_time / generation_resolution)
-    delta_voltage = (nominal_voltage + transient_voltage)
-    delta_voltage_per_step = (delta_voltage / num_of_steps)
     int_num_of_steps = 0
-    while (int_num_of_steps < num_of_steps):
-        if (polarity == 1):
-            storage.append(nominal_voltage - (delta_voltage_per_step * int_num_of_steps))
-        else:
-            storage.append(-nominal_voltage + (delta_voltage_per_step * int_num_of_steps))
-        int_num_of_steps = int_num_of_steps + 1
+    if (polarity == 1):
+        delta_voltage = (nominal_voltage_positive + transient_voltage)
+        delta_voltage_per_step = (delta_voltage / num_of_steps)
+        while (int_num_of_steps < num_of_steps):
+            storage.append(nominal_voltage_positive - (delta_voltage_per_step * int_num_of_steps))
+            int_num_of_steps = int_num_of_steps + 1
+    else:
+        delta_voltage = (nominal_voltage_negative + transient_voltage)
+        delta_voltage_per_step = (delta_voltage / num_of_steps)
+        while (int_num_of_steps < num_of_steps):
+            storage.append(-nominal_voltage_negative + (delta_voltage_per_step * int_num_of_steps))
+            int_num_of_steps = int_num_of_steps + 1
 
 def calc_wave(): #iterate calculating wave modules according to num_of_wave_segments
-    int_nominal_wave_voltage = nominal_voltage
+    int_nominal_wave_voltage = nominal_voltage_positive
     polarity = 1
     int_num_of_modules = 0
     while(int_num_of_modules < num_of_modules):
         calc_wave_module(int_nominal_wave_voltage , polarity)
         if (int_num_of_modules < (num_of_modules - 1)):
             calc_rise_time_module(polarity)
-        int_nominal_wave_voltage = -int_nominal_wave_voltage
+        if (int_nominal_wave_voltage == nominal_voltage_positive):
+            int_nominal_wave_voltage = -nominal_voltage_negative
+        else: 
+            int_nominal_wave_voltage = nominal_voltage_positive
         polarity = -polarity
         int_num_of_modules = int_num_of_modules + 1
