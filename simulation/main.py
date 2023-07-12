@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 storage = transientSimulation.storage
 
 switching_period = translationLayer.switching_period
-nominal_angular_frequency = translationLayer.nominal_angular_frequency
+nominal_angular_frequency_positive = translationLayer.nominal_angular_frequency_positive
+nominal_angular_frequency_negative = translationLayer.nominal_angular_frequency_negative
 transient_rise_time = translationLayer.transient_rise_time
 num_of_modules = translationLayer.num_of_modules
 generation_resolution = translationLayer.generation_resolution

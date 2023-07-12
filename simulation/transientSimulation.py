@@ -4,38 +4,52 @@ import translationLayer
 
 nominal_voltage_positive = translationLayer.nominal_voltage_positve
 nominal_voltage_negative = translationLayer.nominal_voltage_negative
-nominal_frequency = translationLayer.nominal_frequency
-voltage_ripple = translationLayer.voltage_ripple
+nominal_frequency_positive = translationLayer.nominal_frequency_positive
+nominal_frequency_negative = translationLayer.nominal_angular_frequency_negative
+voltage_ripple_positive = translationLayer.voltage_ripple_positive
+voltage_ripple_negative = translationLayer.voltage_ripple_negative
 transient_voltage = translationLayer.transient_voltage
 transient_frequency = translationLayer.transient_frequency
 switching_frequency = translationLayer.switching_frequency
 time_constant = translationLayer.time_constant
 
 transient_rise_time = translationLayer.transient_rise_time
-transient_radian_rise_time = translationLayer.transient_radian_rise_time
+transient_radian_rise_time_positive = translationLayer.transient_radian_rise_time_positive
+transient_radian_rise_time_negative = translationLayer.transient_radian_rise_time_negative
 
-num_of_phases = translationLayer.num_of_phases
+num_of_phases_positive = translationLayer.num_of_phases_positive
+num_of_phases_negative = translationLayer.num_of_phases_negative
 num_of_modules = translationLayer.num_of_modules
 generation_resolution = translationLayer.generation_resolution
 graph_time_interval = translationLayer.graph_time_interval
 
-nominal_period = translationLayer.nominal_period
+nominal_period_positive = translationLayer.nominal_period_positive
+nominal_period_negative = translationLayer.nominal_period_negative
 transient_period = translationLayer.transient_period
 switching_period = translationLayer.switching_period
 
-nominal_angular_frequency = translationLayer.nominal_angular_frequency
+nominal_angular_frequency_positive = translationLayer.nominal_angular_frequency_positive 
+nominal_angular_frequency_negative = translationLayer.nominal_angular_frequency_negative
 transient_angular_frequency = translationLayer.transient_angular_frequency
 switching_angular_frequency = translationLayer.switching_angular_frequency
 
 storage = [] #list used for graph generation
 
-def calc_transient_decay(time): #calculate the amplitude of the decay of the transient at a given time according to a decay function, argument time in radians, returns amplitude in volts
-    seconds_from_radians = time * (1 / nominal_angular_frequency)
-    decay_amplitude = transient_voltage * pow(10000 , -(seconds_from_radians / time_constant)) #decay function, transient_voltage * e ^ -(x / time_constant), change the base to adjust the aggression of the decay
-    if (decay_amplitude > voltage_ripple):    
-        return decay_amplitude
-    else: 
-        return voltage_ripple
+def calc_transient_decay(time , polarity): #calculate the amplitude of the decay of the transient at a given time according to a decay function, argument time in radians, returns amplitude in volts
+    if (polarity == 1):
+        seconds_from_radians = time * (1 / nominal_angular_frequency_positive)
+        decay_amplitude = transient_voltage * pow(10000 , -(seconds_from_radians / time_constant)) #decay function, transient_voltage * e ^ -(x / time_constant), change the base to adjust the aggression of the decay
+        if (decay_amplitude > voltage_ripple_positive):    
+            return decay_amplitude
+        else: 
+            return voltage_ripple_positive
+    else:
+        seconds_from_radians = time * (1 / nominal_angular_frequency_negative)
+        decay_amplitude = transient_voltage * pow(10000 , -(seconds_from_radians / time_constant)) #decay function, transient_voltage * e ^ -(x / time_constant), change the base to adjust the aggression of the decay
+        if (decay_amplitude > voltage_ripple_negative):    
+            return decay_amplitude
+        else: 
+            return voltage_ripple_negative
 
 def calc_wave_amplitude(amplitude , frequency , time): #calculate the amplitude of the wave at a given time, argument amplitude in volts, frequency in hertz, time in radians, returns amplitude in volts
     current_amplitude = amplitude * math.cos(frequency * time)
@@ -57,35 +71,36 @@ def calc_wave_module(offset , polarity): #calculate the current wave amplitude b
             storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_angular_frequency , time) + offset)
             time = time + generation_resolution
         time = 0
-        while (time < (num_of_phases * (2 * pi))):
-            storage.append(calc_wave_amplitude(calc_transient_decay(time) , nominal_angular_frequency, time) + offset)
+        while (time < (num_of_phases_positive * (2 * pi))):
+            storage.append(calc_wave_amplitude(calc_transient_decay(time , polarity) , nominal_angular_frequency_positive, time) + offset)
             time = time + generation_resolution
     else: 
         while (time < calc_wave_intersection(nominal_voltage_negative)):
             storage.append(polarity * calc_wave_amplitude(transient_voltage , transient_angular_frequency , time) + offset)
             time = time + generation_resolution
         time = 0
-        while (time < (num_of_phases * (2 * pi))):
-            storage.append(calc_wave_amplitude(calc_transient_decay(time) , nominal_angular_frequency, time) + offset)
+        while (time < (num_of_phases_negative * (2 * pi))):
+            storage.append(calc_wave_amplitude(calc_transient_decay(time , polarity) , nominal_angular_frequency_negative, time) + offset)
             time = time + generation_resolution
 
 def calc_rise_time_module(polarity): #calculate the current voltage of the rise time linearly, argument boolean polarity
-    num_of_steps = (transient_radian_rise_time / generation_resolution)
     int_num_of_steps = 0
     if (polarity == 1):
+        num_of_steps = (transient_radian_rise_time_positive / generation_resolution)
         delta_voltage = (nominal_voltage_positive + transient_voltage)
         delta_voltage_per_step = (delta_voltage / num_of_steps)
         while (int_num_of_steps < num_of_steps):
             storage.append(nominal_voltage_positive - (delta_voltage_per_step * int_num_of_steps))
             int_num_of_steps = int_num_of_steps + 1
     else:
+        num_of_steps = (transient_radian_rise_time_negative / generation_resolution)
         delta_voltage = (nominal_voltage_negative + transient_voltage)
         delta_voltage_per_step = (delta_voltage / num_of_steps)
         while (int_num_of_steps < num_of_steps):
             storage.append(-nominal_voltage_negative + (delta_voltage_per_step * int_num_of_steps))
             int_num_of_steps = int_num_of_steps + 1
 
-def calc_wave(): #iterate calculating wave modules according to num_of_wave_segments
+def calc_wave(): #iterate calculating wave modules according to num_of_modules
     int_nominal_wave_voltage = nominal_voltage_positive
     polarity = 1
     int_num_of_modules = 0
@@ -99,3 +114,5 @@ def calc_wave(): #iterate calculating wave modules according to num_of_wave_segm
             int_nominal_wave_voltage = nominal_voltage_positive
         polarity = -polarity
         int_num_of_modules = int_num_of_modules + 1
+
+#change num_of_phase * 2 * pi conditional to fix uneven compression
