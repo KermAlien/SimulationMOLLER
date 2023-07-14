@@ -23,10 +23,6 @@ def set_time_resolution(interval): #sets the time resolution for the x-axis of t
         int_num_of_seconds = int_num_of_seconds + interval
     plt.xticks(tick_location , tick_label)
 
-def read_current_amplitude(radian_location): #returns the current amplitude of the wave at a given radian location, parameter radian_location in radians
-    current_amplitude = storage[radian_location / generation_resolution]
-    return current_amplitude
-
 transientSimulation.calc_wave(lower_bound_limit_radian , upper_bound_limit_radian)
 plt.plot(storage)
 set_time_resolution(graph_time_interval)

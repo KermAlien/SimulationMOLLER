@@ -147,6 +147,10 @@ def calc_wave(lower_bound_limit_radian , upper_bound_limit_radian): #iterate cal
         polarity = -polarity
         int_num_of_modules = int_num_of_modules + 1
 
+def read_current_amplitude(radian_location): #returns the current amplitude of the wave at a given radian location, parameter radian_location in radians
+    current_amplitude = storage[radian_location / generation_resolution]
+    return current_amplitude
+
 #change num_of_phase * 2 * pi conditional to fix uneven compression
 #same problem with transient frequency, compression
 #weird spike following first transient
