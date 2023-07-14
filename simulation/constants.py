@@ -28,7 +28,7 @@ switching_frequency = 1920 #switching frequency of the power circuitry, measured
 
 #general:
 transient_resolution = 0.000000001 #resolution with which the transient wave is generated, measured in radians
-nominal_resolution = math.pi / 32 #resolution with which the nominal wave is generated, measured in radians
+nominal_resolution = math.pi / 128 #resolution with which the nominal wave is generated, measured in radians
 
 num_of_modules = 3 #number of simulated voltage transistions
 graph_time_interval = 0.0001 #interval for the x-axis on the graph, measured in seconds

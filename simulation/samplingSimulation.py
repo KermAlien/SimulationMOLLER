@@ -6,7 +6,7 @@
 # num_of_modules = translationLayer.num_of_modules
 
 # storage = transientSimulation.storage
-# generation_resolution = transientSimulation.generation_resolution
+
 
 # BCM_storage = [] #list used for BCM graph generation
 # detector_storage = [] #list used for detector graph generation
@@ -20,6 +20,11 @@
 
 # interval_d = rads_in_wave / num_of_measurements_d #interval that the detector uses to take measurements of the original wave
 # interval_b = rads_in_wave / num_of_measurements_b #interval that the BCM uses to take measurements of the original wave
+
+
+# def read_current_amplitude(radian_location): #returns the current amplitude of the wave at a given radian location, parameter radian_location in radians
+#     current_amplitude = storage[radian_location / generation_resolution]
+#     return current_amplitude
 
 # def calc_wave_detector():
 #     time = 0
