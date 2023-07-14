@@ -82,6 +82,7 @@ def calc_wave_intersection(amplitude , polarity): #calculate the time in radians
 
 def calc_wave_module(offset , polarity , lower_bound_limit_radians , upper_bound_limit_radians): #calculate the current wave amplitude between switching occurances with a given resolution according to increment_resolution, argument offset measured in volts, boolean polarity 
     time = 0
+    global global_timer
     if (polarity == 1):
         while (time < calc_wave_intersection(nominal_voltage_positive , polarity)):
             if (lower_bound_limit_radians < global_timer <= upper_bound_limit_radians):
@@ -109,6 +110,7 @@ def calc_wave_module(offset , polarity , lower_bound_limit_radians , upper_bound
 
 def calc_rise_time_module(polarity , lower_bound_limit_radians , upper_bound_limit_radians): #calculate the current voltage of the rise time linearly, argument boolean polarity
     int_num_of_steps = 0
+    global global_timer
     if (polarity == 1):
         num_of_steps = (transient_radian_rise_time_positive / generation_resolution)
         delta_voltage = (nominal_voltage_positive + transient_voltage_positive)
