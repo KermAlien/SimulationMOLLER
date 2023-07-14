@@ -17,8 +17,8 @@ time_constant = translationLayer.time_constant
 
 transient_rise_time_positive = translationLayer.transient_rise_time_positive
 transient_rise_time_negative = translationLayer.transient_rise_time_negative
-transient_radian_rise_time_positive = translationLayer.transient_radian_rise_time_positive
-transient_radian_rise_time_negative = translationLayer.transient_radian_rise_time_negative
+transient_rise_time_radian_positive = translationLayer.transient_rise_time_radian_positive
+transient_rise_time_radian_negative = translationLayer.transient_rise_time_radian_negative
 
 num_of_phases_positive = translationLayer.num_of_phases_positive
 num_of_phases_negative = translationLayer.num_of_phases_negative
@@ -27,8 +27,8 @@ generation_resolution = translationLayer.generation_resolution
 graph_time_interval = translationLayer.graph_time_interval
 lower_bound_limit = translationLayer.lower_bound_limit
 upper_bound_limit = translationLayer.upper_bound_limit
-lower_bound_limit_radians = translationLayer.lower_bound_limit_radians
-upper_bound_limit_radians = translationLayer.upper_bound_limit_radians
+lower_bound_limit_radian = translationLayer.lower_bound_limit_radian
+upper_bound_limit_radian = translationLayer.upper_bound_limit_radian
 
 nominal_period_positive = translationLayer.nominal_period_positive
 nominal_period_negative = translationLayer.nominal_period_negative
@@ -82,64 +82,64 @@ def calc_wave_intersection(amplitude , polarity): #calculate the time in radians
             time = time + generation_resolution
         return time
 
-def calc_wave_module(offset , polarity , lower_bound_limit_radians , upper_bound_limit_radians): #calculate the current wave amplitude between switching occurances with a given resolution according to increment_resolution, argument offset measured in volts, boolean polarity 
+def calc_wave_module(offset , polarity , lower_bound_limit_radian , upper_bound_limit_radian): #calculate the current wave amplitude between switching occurances with a given resolution according to increment_resolution, argument offset measured in volts, boolean polarity 
     time = 0
     global global_timer
     if (polarity == 1):
         while (time < calc_wave_intersection(nominal_voltage_positive , polarity)):
-            if (lower_bound_limit_radians < global_timer <= upper_bound_limit_radians):
+            if (lower_bound_limit_radian < global_timer <= upper_bound_limit_radian):
                 storage.append(polarity * calc_wave_amplitude(transient_voltage_positive , transient_angular_frequency_positive , time) + offset)
             time = time + generation_resolution
             global_timer = global_timer + generation_resolution
         time = 0
         while (time < (num_of_phases_positive * (2 * pi))):
-            if (lower_bound_limit_radians < global_timer <= upper_bound_limit_radians):
+            if (lower_bound_limit_radian < global_timer <= upper_bound_limit_radian):
                 storage.append(calc_wave_amplitude(calc_transient_decay(time , polarity) , nominal_angular_frequency_positive, time) + offset)
             time = time + generation_resolution
             global_timer = global_timer + generation_resolution
     else: 
         while (time < calc_wave_intersection(nominal_voltage_negative , polarity)):
-            if (lower_bound_limit_radians < global_timer <= upper_bound_limit_radians):
+            if (lower_bound_limit_radian < global_timer <= upper_bound_limit_radian):
                 storage.append(polarity * calc_wave_amplitude(transient_voltage_negative , transient_angular_frequency_negative , time) + offset)
             time = time + generation_resolution
             global_timer = global_timer + generation_resolution
         time = 0
         while (time < (num_of_phases_negative * (2 * pi))):
-            if (lower_bound_limit_radians < global_timer <= upper_bound_limit_radians):
+            if (lower_bound_limit_radian < global_timer <= upper_bound_limit_radian):
                 storage.append(calc_wave_amplitude(calc_transient_decay(time , polarity) , nominal_angular_frequency_negative, time) + offset)
             time = time + generation_resolution
             global_timer = global_timer + generation_resolution
 
-def calc_rise_time_module(polarity , lower_bound_limit_radians , upper_bound_limit_radians): #calculate the current voltage of the rise time linearly, argument boolean polarity
+def calc_rise_time_module(polarity , lower_bound_limit_radian , upper_bound_limit_radian): #calculate the current voltage of the rise time linearly, argument boolean polarity
     int_num_of_steps = 0
     global global_timer
     if (polarity == 1):
-        num_of_steps = (transient_radian_rise_time_positive / generation_resolution)
+        num_of_steps = (transient_rise_time_radian_positive / generation_resolution)
         delta_voltage = (nominal_voltage_positive + transient_voltage_positive)
         delta_voltage_per_step = (delta_voltage / num_of_steps)
         while (int_num_of_steps < num_of_steps):
-            if (lower_bound_limit_radians < global_timer <= upper_bound_limit_radians):
+            if (lower_bound_limit_radian < global_timer <= upper_bound_limit_radian):
                 storage.append(nominal_voltage_positive - (delta_voltage_per_step * int_num_of_steps))
             int_num_of_steps = int_num_of_steps + 1
             global_timer = global_timer + generation_resolution
     else:
-        num_of_steps = (transient_radian_rise_time_negative / generation_resolution)
+        num_of_steps = (transient_rise_time_radian_negative / generation_resolution)
         delta_voltage = (nominal_voltage_negative + transient_voltage_negative)
         delta_voltage_per_step = (delta_voltage / num_of_steps)
         while (int_num_of_steps < num_of_steps):
-            if (lower_bound_limit_radians < global_timer <= upper_bound_limit_radians):
+            if (lower_bound_limit_radian < global_timer <= upper_bound_limit_radian):
                 storage.append(-nominal_voltage_negative + (delta_voltage_per_step * int_num_of_steps))
             int_num_of_steps = int_num_of_steps + 1
             global_timer = global_timer + generation_resolution
 
-def calc_wave(lower_bound_limit_radians , upper_bound_limit_radians): #iterate calculating wave modules according to num_of_modules
+def calc_wave(lower_bound_limit_radian , upper_bound_limit_radian): #iterate calculating wave modules according to num_of_modules
     int_nominal_wave_voltage = nominal_voltage_positive
     polarity = 1
     int_num_of_modules = 0
     while(int_num_of_modules < num_of_modules):
-        calc_wave_module(int_nominal_wave_voltage , polarity , lower_bound_limit_radians , upper_bound_limit_radians)
+        calc_wave_module(int_nominal_wave_voltage , polarity , lower_bound_limit_radian , upper_bound_limit_radian)
         if (int_num_of_modules < (num_of_modules - 1)):
-            calc_rise_time_module(polarity , lower_bound_limit_radians , upper_bound_limit_radians)
+            calc_rise_time_module(polarity , lower_bound_limit_radian , upper_bound_limit_radian)
         if (int_nominal_wave_voltage == nominal_voltage_positive):
             int_nominal_wave_voltage = -nominal_voltage_negative
         else: 

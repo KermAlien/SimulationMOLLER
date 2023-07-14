@@ -8,8 +8,8 @@ generation_resolution = translationLayer.generation_resolution
 graph_time_interval = translationLayer.graph_time_interval
 lower_bound_limit = translationLayer.lower_bound_limit
 upper_bound_limit = translationLayer.upper_bound_limit
-lower_bound_limit_radians = translationLayer.lower_bound_limit_radians
-upper_bound_limit_radians = translationLayer.upper_bound_limit_radians
+lower_bound_limit_radian = translationLayer.lower_bound_limit_radian
+upper_bound_limit_radian = translationLayer.upper_bound_limit_radian
 
 def set_time_resolution(interval): #sets the time resolution for the x-axis of the graph in seconds, parameters array in format list, resolution in radians, angular_frequency in radians / second, and interval in seconds
     tick_location = [] #list to store the tick locations on the graph
@@ -27,7 +27,7 @@ def read_current_amplitude(radian_location): #returns the current amplitude of t
     current_amplitude = storage[radian_location / generation_resolution]
     return current_amplitude
 
-transientSimulation.calc_wave(lower_bound_limit_radians , upper_bound_limit_radians)
+transientSimulation.calc_wave(lower_bound_limit_radian , upper_bound_limit_radian)
 plt.plot(storage)
 set_time_resolution(graph_time_interval)
 plt.show()

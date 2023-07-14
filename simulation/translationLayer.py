@@ -33,8 +33,8 @@ switching_angular_frequency = int(switching_frequency * (2 * pi)) #angular frequ
 
 transient_rise_time_positive = constants.transient_rise_time_positive #positve transient rise time, measured in seconds
 transient_rise_time_negative = constants.transient_rise_time_negative #negative transient rise time, measured in seconds
-transient_radian_rise_time_positive = transient_rise_time_positive * nominal_angular_frequency_positive #positive transient rise time, converted to radians according to the nominal angular frequency
-transient_radian_rise_time_negative = transient_rise_time_negative * nominal_angular_frequency_negative #negative transient rise time, converted to radians according to the nominal angular frequency
+transient_rise_time_radian_positive = transient_rise_time_positive * nominal_angular_frequency_positive #positive transient rise time, converted to radians according to the nominal angular frequency
+transient_rise_time_radian_negative = transient_rise_time_negative * nominal_angular_frequency_negative #negative transient rise time, converted to radians according to the nominal angular frequency
 
 #general:
 num_of_phases_positive = (switching_period - transient_period_positive) / nominal_period_positive #positive number of nominal phases per wave module
@@ -46,8 +46,8 @@ generation_resolution = constants.generation_resolution #resolution with which t
 graph_time_interval = constants.graph_time_interval #interval for the x-axis on the graph, measured in seconds
 lower_bound_limit = constants.lower_bound_limit #horizontal lower bound limit of the graph, measured in seconds
 upper_bound_limit = constants.upper_bound_limit #horizontal upper bound limit of the graph, measured in seconds
-lower_bound_limit_radians = lower_bound_limit * switching_angular_frequency #0 #horizontal lower bound limit of the graph, measured in radians
-upper_bound_limit_radians = upper_bound_limit * switching_angular_frequency #2000 #horizontal upperr bound limit of the graph, measured in radians
+lower_bound_limit_radian = lower_bound_limit * switching_angular_frequency #0 #horizontal lower bound limit of the graph, measured in radians
+upper_bound_limit_radian = upper_bound_limit * switching_angular_frequency #2000 #horizontal upperr bound limit of the graph, measured in radians
 
 num_of_seconds_positive = (num_of_modules_positive * switching_period) + (num_of_modules_negative * transient_rise_time_positive) #number of seconds during positve modules
 num_of_seconds_negative = (num_of_modules_negative * switching_period) + ((num_of_modules_positive - 1) * transient_rise_time_negative) #number of seconds during negative modules
