@@ -5,16 +5,11 @@ detector_period = translationLayer.detector_period
 BCM_period = translationLayer.BCM_period
 num_of_modules = translationLayer.num_of_modules
 
-<<<<<<< Updated upstream:samplingSimulation.py
-# storage = transientSimulation.storage
-# generation_resolution = transientSimulation.generation_resolution
-=======
 storage = transientSimulation.storage
 generation_resolution = translationLayer.generation_resolution
 
 BCM_storage = [] #list used for BCM graph generation
 detector_storage = [] #list used for detector graph generation
->>>>>>> Stashed changes:simulation/samplingSimulation.py
 
 rads_in_wave = len(storage) * generation_resolution #total number of radians in the original wave
 
@@ -30,23 +25,6 @@ def read_current_amplitude(radian_location): #returns the current amplitude of t
     current_amplitude = storage[int(radian_location / generation_resolution)]
     return current_amplitude
 
-<<<<<<< Updated upstream:samplingSimulation.py
-# def calc_wave_detector():
-#     time = 0
-#     location = 0
-#     while (time < num_of_measurements_d):
-#         #mas
-#         time = time + interval_d
-#         location = location + interval_d
-
-# def calc_wave_BCM():
-#     time = 0
-#     location = 0
-#     while (time < num_of_measurements_b):
-#         #mas
-#         time = time + interval_b
-#         location = location + interval_b
-=======
 def calc_wave_detector():
     time = 0
     while (time < num_of_measurements_d):
@@ -58,4 +36,3 @@ def calc_wave_BCM():
     while (time < num_of_measurements_b):
         BCM_storage.append(read_current_amplitude(time))
         time = time + interval_b
->>>>>>> Stashed changes:simulation/samplingSimulation.py
