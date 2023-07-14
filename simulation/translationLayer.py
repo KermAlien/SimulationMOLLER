@@ -56,9 +56,9 @@ num_of_modules_negative = int(num_of_modules / 2) #number of negative modules
 generation_resolution = constants.generation_resolution #resolution with which the wave module is generated, measured in radians
 graph_time_interval = constants.graph_time_interval #interval for the x-axis on the graph, measured in seconds
 lower_bound_limit = constants.lower_bound_limit #horizontal lower bound limit of the graph, measured in seconds
-lower_bound_limit_radians = 1 #lower_bound_limit * switching_angular_frequency #horizontal lower bound limit of the graph, measured in radians
+lower_bound_limit_radians = lower_bound_limit * switching_angular_frequency #horizontal lower bound limit of the graph, measured in radians
 upper_bound_limit = constants.lower_bound_limit #horizontal upper bound limit of the graph, measured in seconds
-upper_bound_limit_radians = 2 #upper_bound_limit * switching_angular_frequency #horizontal upperr bound limit of the graph, measured in radians
+upper_bound_limit_radians = upper_bound_limit * switching_angular_frequency #horizontal upperr bound limit of the graph, measured in radians
 
 num_of_seconds_positive = (num_of_modules_positive * switching_period) + (num_of_modules_negative * transient_rise_time_positive) #number of seconds during positve modules
 num_of_seconds_negative = (num_of_modules_negative * switching_period) + ((num_of_modules_positive - 1) * transient_rise_time_negative) #number of seconds during negative modules
