@@ -36,17 +36,6 @@ transient_rise_time_negative = constants.transient_rise_time_negative #negative 
 transient_radian_rise_time_positive = transient_rise_time_positive * nominal_angular_frequency_positive #positive transient rise time, converted to radians according to the nominal angular frequency
 transient_radian_rise_time_negative = transient_rise_time_negative * nominal_angular_frequency_negative #negative transient rise time, converted to radians according to the nominal angular frequency
 
-#trigger pulse:
-#trigger_duty_cycle = constants.trigger_duty_cycle
-#trigger_nominal_voltage = constants.trigger_nominal_voltage
-#trigger_latency = constants.trigger_latency
-
-#trigger_rise_time = constants.trigger_rise_time
-#trigger_radian_rise_time = trigger_rise_time * nominal_angular_frequency
-
-#systematic error:
-#percent_error = constants.percent_error
-
 #general:
 num_of_phases_positive = (switching_period - transient_period_positive) / nominal_period_positive #positive number of nominal phases per wave module
 num_of_phases_negative = (switching_period - transient_period_negative) / nominal_period_negative #negative number of nominal phases per wave module
@@ -56,10 +45,18 @@ num_of_modules_negative = int(num_of_modules / 2) #number of negative modules
 generation_resolution = constants.generation_resolution #resolution with which the wave module is generated, measured in radians
 graph_time_interval = constants.graph_time_interval #interval for the x-axis on the graph, measured in seconds
 lower_bound_limit = constants.lower_bound_limit #horizontal lower bound limit of the graph, measured in seconds
-lower_bound_limit_radians = lower_bound_limit * switching_angular_frequency #0 #horizontal lower bound limit of the graph, measured in radians
 upper_bound_limit = constants.upper_bound_limit #horizontal upper bound limit of the graph, measured in seconds
+lower_bound_limit_radians = lower_bound_limit * switching_angular_frequency #0 #horizontal lower bound limit of the graph, measured in radians
 upper_bound_limit_radians = upper_bound_limit * switching_angular_frequency #2000 #horizontal upperr bound limit of the graph, measured in radians
 
 num_of_seconds_positive = (num_of_modules_positive * switching_period) + (num_of_modules_negative * transient_rise_time_positive) #number of seconds during positve modules
 num_of_seconds_negative = (num_of_modules_negative * switching_period) + ((num_of_modules_positive - 1) * transient_rise_time_negative) #number of seconds during negative modules
 num_of_seconds = num_of_seconds_positive + num_of_seconds_negative #total number of seconds throughout all modules
+
+#trigger pulse:
+#trigger_duty_cycle = constants.trigger_duty_cycle
+#trigger_nominal_voltage = constants.trigger_nominal_voltage
+#trigger_latency = constants.trigger_latency
+
+#trigger_rise_time = constants.trigger_rise_time
+#trigger_radian_rise_time = trigger_rise_time * nominal_angular_frequency

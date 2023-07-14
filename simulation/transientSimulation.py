@@ -25,6 +25,8 @@ num_of_phases_negative = translationLayer.num_of_phases_negative
 num_of_modules = translationLayer.num_of_modules
 generation_resolution = translationLayer.generation_resolution
 graph_time_interval = translationLayer.graph_time_interval
+lower_bound_limit = translationLayer.lower_bound_limit
+upper_bound_limit = translationLayer.upper_bound_limit
 lower_bound_limit_radians = translationLayer.lower_bound_limit_radians
 upper_bound_limit_radians = translationLayer.upper_bound_limit_radians
 

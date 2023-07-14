@@ -4,20 +4,11 @@ import matplotlib.pyplot as plt
 
 storage = transientSimulation.storage
 
-nominal_angular_frequency_positive = translationLayer.nominal_angular_frequency_positive
-nominal_angular_frequency_negative = translationLayer.nominal_angular_frequency_negative
-switching_period = translationLayer.switching_period
-transient_rise_time_positive = translationLayer.transient_rise_time_positive
-transient_rise_time_negative = translationLayer.transient_rise_time_negative
-num_of_modules = translationLayer.num_of_modules
 generation_resolution = translationLayer.generation_resolution
 graph_time_interval = translationLayer.graph_time_interval
-lower_bound_limit_radians = translationLayer.lower_bound_limit_radians
-upper_bound_limit_radians = translationLayer.upper_bound_limit_radians
-num_of_seconds = translationLayer.num_of_seconds
 lower_bound_limit = translationLayer.lower_bound_limit
-lower_bound_limit_radians = translationLayer.lower_bound_limit_radians
 upper_bound_limit = translationLayer.upper_bound_limit
+lower_bound_limit_radians = translationLayer.lower_bound_limit_radians
 upper_bound_limit_radians = translationLayer.upper_bound_limit_radians
 
 def set_time_resolution(interval): #sets the time resolution for the x-axis of the graph in seconds, parameters array in format list, resolution in radians, angular_frequency in radians / second, and interval in seconds
