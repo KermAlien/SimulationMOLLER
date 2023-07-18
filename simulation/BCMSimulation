@@ -6,3 +6,5 @@ import transientSimulation
 bcm_sampling_rate = translationLayer.bcm_sampling_rate
 
 storage = transientSimulation.storage
+
+bcm = [] #list used for BCMSimulation generation

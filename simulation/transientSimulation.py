@@ -42,7 +42,7 @@ transient_angular_frequency_positive = translationLayer.transient_angular_freque
 transient_angular_frequency_negative = translationLayer.transient_angular_frequency_negative
 switching_angular_frequency = translationLayer.switching_angular_frequency
 
-storage = [] #list used for graph generation
+storage = [] #list used for transientSimulation generation
 
 global_timer = 0 #variable used to store the global time in calc_wave_module() and calc_rise_time_module()
 
