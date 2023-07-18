@@ -42,6 +42,8 @@ timer_upper_bound = translationLayer.timer_upper_bound
 
 storage = [] #list used for graph generation
 
+stop = False
+
 timer = 0
 time2 = 0
 
@@ -85,7 +87,24 @@ def calc_wave_intersection(amplitude , polarity): #calculate the time in radians
             time1 = time1 + generation_resolution
         return time1
 
+def calc_wave_intersection_rt(amplitude , polarity): #calculate the time in radians that the transient wave equals a given amplitude, argument amplitude in volts, returns time in radians
+    time1 = 0
+    acceptable_error = (0.0001 * amplitude) #acceptable error between current amplitude and target amplitude in amplitude calculation, measured in volts
+    if (polarity == 1):
+        current_amplitude = 0
+        while (current_amplitude < (amplitude + acceptable_error)):
+            current_amplitude = calc_wave_amplitude_rt(transient_rt_voltage_positive , transient_angular_frequency_positive / 2 , time1) - 3000
+            time1 = time1 + generation_resolution
+        return time1
+    else:
+        current_amplitude = 0
+        while (current_amplitude < (amplitude + acceptable_error)):
+            current_amplitude = calc_wave_amplitude_rt(transient_rt_voltage_negative , transient_angular_frequency_negative / 2 , time1) - 3000
+            time1 = time1 + generation_resolution
+        return time1
+
 def calc_wave_module(offset , polarity): #calculate the current wave amplitude between switching occurances with a given resolution according to increment_resolution, argument offset measured in volts, boolean polarity 
+    global stop
     global time2
     time2 = 0
     global timer
@@ -93,24 +112,36 @@ def calc_wave_module(offset , polarity): #calculate the current wave amplitude b
         while (time2 < calc_wave_intersection(nominal_voltage_positive , polarity)):
             if (timer_lower_bound < timer < timer_upper_bound):
                 storage.append(polarity * calc_wave_amplitude(transient_voltage_positive , transient_angular_frequency_positive / 2 , time2))
+            elif (timer >= timer_upper_bound):
+                stop = True
             time2 = time2 + generation_resolution
             timer = timer + generation_resolution
+            print(timer)
         time3 = 0
-        while (time3 < 0.0001):
-            if (timer_lower_bound < timer < timer_upper_bound):
-                storage.append(calc_wave_amplitude_rt(voltage_ripple_positive , nominal_angular_frequency_positive , time3) + offset)
-            time3 = time3 + generation_resolution
-            timer = timer + generation_resolution
+        while (time3 < num_of_phases_positive * (2 * pi)):
+            while (stop == False):
+                if (timer_lower_bound < timer < timer_upper_bound):
+                    storage.append(calc_wave_amplitude_rt(voltage_ripple_positive , nominal_angular_frequency_positive , time3) + offset)
+                elif (timer >= timer_upper_bound):
+                    stop = True
+                time3 = time3 + generation_resolution
+                timer = timer + generation_resolution
+                print(timer)
+            time3 = time3 + 10000
     else:
         while (time2 < calc_wave_intersection(nominal_voltage_negative , polarity)):
             if (timer_lower_bound < timer < timer_upper_bound):
                 storage.append(polarity * calc_wave_amplitude(transient_voltage_negative , transient_angular_frequency_negative / 2 , time2))
+            elif (timer >= timer_upper_bound):
+                stop = True
             time2 = time2 + generation_resolution
             timer = timer + generation_resolution
         time3 = 0
-        while (time3 < 0.0001): 
+        while (time3 < num_of_phases_negative * (2 * pi)): 
             if (timer_lower_bound < timer < timer_upper_bound):
                 storage.append(calc_wave_amplitude(voltage_ripple_negative , nominal_angular_frequency_negative, time3) + offset)
+            elif (timer >= timer_upper_bound):
+                stop = True
             time3 = time3 + generation_resolution
             timer = timer + generation_resolution
 
@@ -119,25 +150,28 @@ def calc_rise_time_module(offset , polarity): #calculate the current voltage of 
     global time2
     global timer
     if (polarity == 1):
-        while (time4 < time2):
+        while (time4 < calc_wave_intersection_rt(transient_voltage_positive , polarity)):
             if (timer_lower_bound < timer < timer_upper_bound):
-                storage.append(-polarity * calc_wave_amplitude_rt(transient_rt_voltage_positive , transient_angular_frequency_positive / 2 , time4) + offset)
+                storage.append(polarity * calc_wave_amplitude_rt(transient_rt_voltage_positive , transient_angular_frequency_positive / 2 , time4) - offset)
             time4 = time4 + generation_resolution
             timer = timer + generation_resolution
+            print(timer)
     else:
-        while (time4 < time2):
+        while (time4 < calc_wave_intersection_rt(transient_voltage_negative , polarity)):
             if (timer_lower_bound < timer < timer_upper_bound):
-                storage.append(-polarity * calc_wave_amplitude_rt(transient_rt_voltage_negative , transient_angular_frequency_negative / 2 , time4) + offset)
+                storage.append(polarity * calc_wave_amplitude_rt(transient_rt_voltage_negative , transient_angular_frequency_negative / 2 , time4) - offset)
             time4 = time4 + generation_resolution
             timer = timer + generation_resolution
+            print(timer)
 
 def calc_wave(): #iterate calculating wave modules according to num_of_modules
+    global stop
     int_nominal_wave_voltage = nominal_voltage_positive
     polarity = 1
     int_num_of_modules = 0
     while (int_num_of_modules < num_of_modules):
-        calc_wave_module(int_nominal_wave_voltage , polarity)
         calc_rise_time_module(int_nominal_wave_voltage , polarity)
+        calc_wave_module(int_nominal_wave_voltage , polarity)
         if (int_nominal_wave_voltage == nominal_voltage_positive):
             int_nominal_wave_voltage = -nominal_voltage_negative
         else: 

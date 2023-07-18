@@ -6,6 +6,8 @@ import constants
 resistance = constants.resistance
 capacitance = constants.capacitance
 
+BCM_frequency = constants.BCM_frequency
+
 nominal_voltage_positve = constants.nominal_voltage_positve #positive nominal voltage of the wave, measured in volts
 nominal_voltage_negative = constants.nominal_voltage_negative #negative nominal voltage of the wave, measured in volts
 nominal_frequency_positive = constants.nominal_frequency_positive #positive wave frequency, measured in hertz
@@ -53,9 +55,6 @@ graph_time_interval = constants.graph_time_interval #interval for the x-axis on 
 generation_resolution = constants.generation_resolution
 # transient_resolution = constants.transient_resolution #resolution with which the transient wave is generated, measured in radians
 # nominal_resolution = constants.nominal_resolution #resolution with which the nominal wave is generated, measured in radians
-
-detector_period = 1 / constants.detector_resolution #period with which the wave is "measured" by the detector, measured in seconds
-BCM_period = 1 / constants.BCM_resolution #period with which the wave is "measured" by the BCM, measured in seconds
 
 #timer
 timer_lower_bound = constants.timer_lower_bound

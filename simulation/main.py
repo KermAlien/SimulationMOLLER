@@ -1,16 +1,14 @@
 import translationLayer
 import transientSimulation
-import simulation.samplingSimulation as samplingSimulation
+import samplingSimulation
 import matplotlib.pyplot as plt
 
 transientSimulation.calc_wave()
-# samplingSimulation.calc_wave_detector()
 # samplingSimulation.calc_wave_BCM()
 
 storage = transientSimulation.storage
 
-detector_storage = samplingSimulation.detector_storage
-BCM_storage = samplingSimulation.BCM_storage
+# BCM_storage = samplingSimulation.BCM_storage
 
 # nominal_angular_frequency_positive = translationLayer.nominal_angular_frequency_positive
 # nominal_angular_frequency_negative = translationLayer.nominal_angular_frequency_negative
@@ -72,7 +70,6 @@ BCM_storage = samplingSimulation.BCM_storage
 # axs[1].set_title('BCM')
 
 # plt.show()
-
 
 
 
