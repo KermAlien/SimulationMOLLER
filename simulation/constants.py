@@ -17,13 +17,13 @@ switching_frequency = 1920 #switching frequency of the power circuitry, measured
 
 #general:
 num_of_modules = 3 #number of simulated voltage transistions
-generation_resolution = 0.001 #resolution with which the wave is generated, measured in radians
+generation_resolution = 0.1 #resolution with which the wave is generated, measured in radians
 graph_time_interval = 0.1 #interval for the x-axis on the graph, measured in seconds
 lower_bound_limit = 0.2 #horizontal lower bound limit of the graph, measured in seconds
 upper_bound_limit = 0.4 #horizontal upper bound limit of the graph, measured in seconds
 
 #trigger pulse:
-#trigger_duty_cycle = 0.5
-#trigger_nominal_voltage = 5
-#trigger_latency = 0
-#trigger_rise_time = 0.001
+trigger_duty_cycle = 0.5 #duty cycle of the trigger pulse
+trigger_nominal_voltage = 5 #nominal voltage of the trigger pulse 
+trigger_latency = 0 #latency of the trigger pulse ahead of the wave generation, measured in seconds
+trigger_rise_time = 0.001 #period of the trigger pulse rise time, measured in seconds

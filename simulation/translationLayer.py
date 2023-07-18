@@ -54,9 +54,8 @@ num_of_seconds_negative = (num_of_modules_negative * switching_period) + ((num_o
 num_of_seconds = num_of_seconds_positive + num_of_seconds_negative #total number of seconds throughout all modules
 
 #trigger pulse:
-#trigger_duty_cycle = constants.trigger_duty_cycle
-#trigger_nominal_voltage = constants.trigger_nominal_voltage
-#trigger_latency = constants.trigger_latency
-
-#trigger_rise_time = constants.trigger_rise_time
-#trigger_radian_rise_time = trigger_rise_time * nominal_angular_frequency
+trigger_duty_cycle = constants.trigger_duty_cycle #duty cycle of the trigger pulse
+trigger_nominal_voltage = constants.trigger_nominal_voltage #nominal voltage of the trigger pulse 
+trigger_latency = constants.trigger_latency #latency of the trigger pulse ahead of the wave generation, measured in seconds
+trigger_rise_time = constants.trigger_rise_time #period of the trigger pulse rise time, measured in seconds
+trigger_radian_rise_time = trigger_rise_time * switching_angular_frequency #period of the trigger pulse rise time, measured in radians
