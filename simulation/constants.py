@@ -27,3 +27,9 @@ trigger_duty_cycle = 0.25 #duty cycle of the trigger pulse
 trigger_nominal_voltage = 5 #nominal voltage of the trigger pulse 
 trigger_latency = 0 #latency of the trigger pulse ahead of the wave generation, measured in seconds
 trigger_rise_time = 0.0001 #period of the trigger pulse rise time, measured in seconds
+
+#BCM Simulation
+bcm_sampling_rate = 10000 #sampling rate of the beam current monitor, measured in samples per second
+
+#Detector Simulation
+detector_sampling_rate = 10000 #sampling rate of the detector, measured in samples per second

@@ -59,3 +59,9 @@ trigger_nominal_voltage = constants.trigger_nominal_voltage #nominal voltage of 
 trigger_latency = constants.trigger_latency #latency of the trigger pulse ahead of the wave generation, measured in seconds
 trigger_rise_time = constants.trigger_rise_time #period of the trigger pulse rise time, measured in seconds
 trigger_radian_rise_time = trigger_rise_time * switching_angular_frequency #period of the trigger pulse rise time, measured in radians
+
+#BCM Simulation
+bcm_sampling_rate = constants.bcm_sampling_rate #sampling rate of the beam current monitor, measured in samples per second
+
+#Detector Simulation
+detector_sampling_rate = constants.detector_sampling_rate #sampling rate of the detector, measured in samples per second
