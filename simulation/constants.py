@@ -23,7 +23,7 @@ lower_bound_limit = 0.2 #horizontal lower bound limit of the graph, measured in 
 upper_bound_limit = 0.4 #horizontal upper bound limit of the graph, measured in seconds
 
 #trigger pulse:
-trigger_duty_cycle = 0.5 #duty cycle of the trigger pulse
+trigger_duty_cycle = 0.25 #duty cycle of the trigger pulse
 trigger_nominal_voltage = 5 #nominal voltage of the trigger pulse 
 trigger_latency = 0 #latency of the trigger pulse ahead of the wave generation, measured in seconds
 trigger_rise_time = 0.0001 #period of the trigger pulse rise time, measured in seconds

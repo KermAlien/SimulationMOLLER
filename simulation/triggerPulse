@@ -24,15 +24,20 @@ def calc_rise_time_module(polarity): #calculate the current voltage of the rise 
             trigger.append(trigger_nominal_voltage - (delta_voltage_per_step * int_num_of_steps))
         int_num_of_steps = int_num_of_steps + 1
 
-def calc_trigger_module():
+def calc_trigger_module(): #generate a trigger pulse according to a PWM waveform 
     int_num_of_modules = 0
     polarity = 1
     while (int_num_of_modules < num_of_modules):
         calc_rise_time_module(polarity)
         time = 0
-        while (time < (switching_period - trigger_rise_time)):
-            trigger.append(polarity * trigger_nominal_voltage)
-            time = time + (generation_resolution * (1 / switching_angular_frequency))
+        if (polarity == 1):
+            while (time < (trigger_duty_cycle * (switching_period - trigger_rise_time))):
+                trigger.append(polarity * trigger_nominal_voltage)
+                time = time + (generation_resolution * (1 / switching_angular_frequency))
+        else: 
+            while (time < ((1 - trigger_duty_cycle) * (switching_period - trigger_rise_time))):
+                trigger.append(polarity * trigger_nominal_voltage)
+                time = time + (generation_resolution * (1 / switching_angular_frequency))
         polarity = -polarity
         int_num_of_modules = int_num_of_modules + 1
 
