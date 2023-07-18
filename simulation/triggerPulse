@@ -44,3 +44,6 @@ def calc_trigger_module(): #generate a trigger pulse according to a PWM waveform
 calc_trigger_module()
 plt.plot(trigger)
 plt.show()
+
+#generalize calc_rise_time_module() with transientSimulation?
+#make triggerPulse wave start from zero
