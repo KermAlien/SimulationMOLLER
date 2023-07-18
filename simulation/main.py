@@ -1,7 +1,9 @@
 import translationLayer
+import triggerPulse
 import transientSimulation
 import matplotlib.pyplot as plt
 
+trigger = triggerPulse.trigger
 storage = transientSimulation.storage
 
 generation_resolution = translationLayer.generation_resolution
