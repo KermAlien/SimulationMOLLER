@@ -4,15 +4,5 @@ import translationLayer
 import transientSimulation
 
 bcm_sampling_rate = translationLayer.bcm_sampling_rate
-lower_bound_limit_radian = translationLayer.lower_bound_limit_radian
-upper_bound_limit_radian = translationLayer.upper_bound_limit_radian
-num_of_modules = translationLayer.num_of_modules
-num_of_phases = translationLayer.num_of_phases_positive + translationLayer.num_of_phases_negative
-num_of_seconds = translationLayer.num_of_seconds
 
 storage = transientSimulation.storage
-
-num_of_radian_bounded = upper_bound_limit_radian - lower_bound_limit_radian
-num_of_radian = (num_of_modules * (pi + (num_of_phases * 2 * pi)))
-
-num_of_seconds_bounded = ((num_of_radian_bounded / num_of_radian) * num_of_seconds) #number of seconds in the bounded wave

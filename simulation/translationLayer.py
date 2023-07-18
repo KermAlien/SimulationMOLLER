@@ -39,6 +39,7 @@ transient_rise_time_radian_negative = transient_rise_time_negative * nominal_ang
 #general:
 num_of_phases_positive = (switching_period - transient_period_positive) / nominal_period_positive #positive number of nominal phases per wave module
 num_of_phases_negative = (switching_period - transient_period_negative) / nominal_period_negative #negative number of nominal phases per wave module
+num_of_phases = num_of_phases_positive + num_of_phases_negative #total number of phases throughout all modules
 num_of_modules = constants.num_of_modules #number of wave modules
 num_of_modules_positive = round(num_of_modules / 2) #number of positive modules
 num_of_modules_negative = int(num_of_modules / 2) #number of negative modules
@@ -52,6 +53,7 @@ upper_bound_limit_radian = upper_bound_limit * switching_angular_frequency #2000
 num_of_seconds_positive = (num_of_modules_positive * switching_period) + (num_of_modules_negative * transient_rise_time_positive) #number of seconds during positve modules
 num_of_seconds_negative = (num_of_modules_negative * switching_period) + ((num_of_modules_positive - 1) * transient_rise_time_negative) #number of seconds during negative modules
 num_of_seconds = num_of_seconds_positive + num_of_seconds_negative #total number of seconds throughout all modules
+num_of_seconds_bounded = upper_bound_limit - lower_bound_limit #number of seconds in the bounded wave
 
 #trigger pulse:
 trigger_duty_cycle = constants.trigger_duty_cycle #duty cycle of the trigger pulse
