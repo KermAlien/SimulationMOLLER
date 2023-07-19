@@ -1,5 +1,3 @@
-import math
-
 #transient simulation:
 resistance = 730000000000 # resistance of the RTP crystal, measured in ohms
 capacitance = 0.0000000000000006 # capacitance of the RTP crystal, measured in farads
@@ -27,7 +25,7 @@ switching_frequency = 1920 #switching frequency of the power circuitry, measured
 #percent_error = 0
 
 #general:
-generation_resolution = 0.000000001 #resolution with which the wave is generated, measured in radians
+generation_resolution = 0.001 #resolution with which the wave is generated, measured in radians
 # transient_resolution = 0.000000001 #resolution with which the transient wave is generated, measured in radians
 # nominal_resolution = 0.00001 #resolution with which the nominal wave is generated, measured in radians
 
@@ -38,4 +36,4 @@ BCM_frequency = 10000 #resolution with which the wave is "measured" by the BCM, 
 
 #timer
 timer_lower_bound = 0 #1604.2
-timer_upper_bound = 0.0001 #???
+timer_upper_bound = 32.084

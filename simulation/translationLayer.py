@@ -6,8 +6,6 @@ import constants
 resistance = constants.resistance
 capacitance = constants.capacitance
 
-BCM_frequency = constants.BCM_frequency
-
 nominal_voltage_positve = constants.nominal_voltage_positve #positive nominal voltage of the wave, measured in volts
 nominal_voltage_negative = constants.nominal_voltage_negative #negative nominal voltage of the wave, measured in volts
 nominal_frequency_positive = constants.nominal_frequency_positive #positive wave frequency, measured in hertz
@@ -56,6 +54,15 @@ generation_resolution = constants.generation_resolution
 # transient_resolution = constants.transient_resolution #resolution with which the transient wave is generated, measured in radians
 # nominal_resolution = constants.nominal_resolution #resolution with which the nominal wave is generated, measured in radians
 
-#timer
+#sampling:
+BCM_frequency = constants.BCM_frequency
+
+BCM_angular_frequency = BCM_frequency * (2 * pi)
+
+#timer:
 timer_lower_bound = constants.timer_lower_bound
 timer_upper_bound = constants.timer_upper_bound
+
+rads_in_calculated_wave = timer_upper_bound - timer_lower_bound
+
+rads_in_nominal = (num_of_phases_positive * (2 * pi))
