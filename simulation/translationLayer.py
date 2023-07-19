@@ -54,6 +54,7 @@ num_of_seconds_positive = (num_of_modules_positive * switching_period) + (num_of
 num_of_seconds_negative = (num_of_modules_negative * switching_period) + ((num_of_modules_positive - 1) * transient_rise_time_negative) #number of seconds during negative modules
 num_of_seconds = num_of_seconds_positive + num_of_seconds_negative #total number of seconds throughout all modules
 num_of_seconds_bounded = upper_bound_limit - lower_bound_limit #number of seconds in the bounded wave
+num_of_radians_bounded = upper_bound_limit_radian - lower_bound_limit_radian #number of radians in the bounded wave
 
 #trigger pulse:
 trigger_duty_cycle = constants.trigger_duty_cycle #duty cycle of the trigger pulse
