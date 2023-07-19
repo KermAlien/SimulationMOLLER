@@ -2,11 +2,13 @@ import translationLayer
 import triggerPulse
 import transientSimulation
 import BCMSimulation
+import detectorSimulation
 import matplotlib.pyplot as plt
 
 trigger = triggerPulse.trigger
 storage = transientSimulation.storage
 bcm = BCMSimulation.bcm
+detector = detectorSimulation.detector
 
 generation_resolution = translationLayer.generation_resolution
 graph_time_interval = translationLayer.graph_time_interval
@@ -30,13 +32,13 @@ def set_time_resolution(interval): #sets the time resolution for the x-axis of t
 transientSimulation.calc_wave(lower_bound_limit_radian , upper_bound_limit_radian)
 #plt.plot(storage)
 #set_time_resolution(graph_time_interval)
-#plt.show()
 
 BCMSimulation.calc_bcm()
-plt.plot(bcm)
-plt.show()
+#plt.plot(bcm)
 
-#print(len(storage))
-#print(translationLayer.num_of_seconds_bounded * translationLayer.bcm_sampling_rate)
+detectorSimulation.calc_detector()
+#plt.plot(detector)
+
+plt.show()
 
 #not sure if set_time_resolution() is setting an accurate time scale
