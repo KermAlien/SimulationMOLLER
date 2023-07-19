@@ -51,8 +51,6 @@ num_of_modules = constants.num_of_modules #number of wave modules
 graph_time_interval = constants.graph_time_interval #interval for the x-axis on the graph, measured in seconds
 
 generation_resolution = constants.generation_resolution
-# transient_resolution = constants.transient_resolution #resolution with which the transient wave is generated, measured in radians
-# nominal_resolution = constants.nominal_resolution #resolution with which the nominal wave is generated, measured in radians
 
 #sampling:
 BCM_frequency = constants.BCM_frequency

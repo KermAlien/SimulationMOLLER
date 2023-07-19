@@ -9,8 +9,8 @@ voltage_ripple_positive = 600 #voltage ripple of the power circuitry, measured i
 voltage_ripple_negative = 600 #voltage ripple of the power circuitry, measured in volts
 transient_voltage_positive = 14400 #voltage of the transient, measured in volts
 transient_voltage_negative = 14400 #voltage of the transient, measured in volts
-transient_rt_voltage_positive = 17700 #voltage of the transient, measured in volts
-transient_rt_voltage_negative = 17700 #voltage of the transient, measured in volts
+transient_rt_voltage_positive = 17798 #voltage of the transient, measured in volts
+transient_rt_voltage_negative = 17798 #voltage of the transient, measured in volts
 transient_frequency_positive = 98039 #positive frequency of the transient, measured in hertz
 transient_frequency_negative = 98039 #negative frequency of the transient, measured in hertz
 switching_frequency = 1920 #switching frequency of the power circuitry, measured in hertz
@@ -26,14 +26,12 @@ switching_frequency = 1920 #switching frequency of the power circuitry, measured
 
 #general:
 generation_resolution = 0.001 #resolution with which the wave is generated, measured in radians
-# transient_resolution = 0.000000001 #resolution with which the transient wave is generated, measured in radians
-# nominal_resolution = 0.00001 #resolution with which the nominal wave is generated, measured in radians
 
-num_of_modules = 1 #number of simulated voltage transistions
+num_of_modules = 3 #number of simulated voltage transistions
 graph_time_interval = 0.0001 #interval for the x-axis on the graph, measured in seconds
 
 BCM_frequency = 10000 #resolution with which the wave is "measured" by the BCM, measured in hertz
 
 #timer
-timer_lower_bound = 0 #1604.2
-timer_upper_bound = 32.084
+timer_lower_bound = 0
+timer_upper_bound = 10000000000 #1604.227 for the full wave
