@@ -29,15 +29,21 @@ def set_time_resolution(interval): #sets the time resolution for the x-axis of t
         int_num_of_seconds = int_num_of_seconds + interval
     plt.xticks(tick_location , tick_label)
 
+triggerPulse.calc_trigger()
 transientSimulation.calc_wave(lower_bound_limit_radian , upper_bound_limit_radian)
-#plt.plot(storage)
-#set_time_resolution(graph_time_interval)
-
 BCMSimulation.calc_bcm()
-#plt.plot(bcm)
-
 detectorSimulation.calc_detector()
-#plt.plot(detector)
+
+fig, axs = plt.subplots(4)
+fig.tight_layout()
+axs[0].set_title('Trigger Pulse')
+axs[0].plot(trigger)
+axs[1].set_title('Light State Generation')
+axs[1].plot(storage)
+axs[2].set_title('Beam Current Monitor')
+axs[2].plot(bcm)
+axs[3].set_title('Detector')
+axs[3].plot(detector)
 
 plt.show()
 
