@@ -60,7 +60,3 @@ BCM_angular_frequency = BCM_frequency * (2 * pi)
 #timer:
 timer_lower_bound = constants.timer_lower_bound
 timer_upper_bound = constants.timer_upper_bound
-
-rads_in_calculated_wave = timer_upper_bound - timer_lower_bound
-
-rads_in_nominal = (num_of_phases_positive * (2 * pi))
