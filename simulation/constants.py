@@ -35,3 +35,5 @@ BCM_resolution = 10000 #frequency with which the BCM measures the wave aka sampl
 #timer
 timer_lower_bound = 0
 timer_upper_bound = 10000000000 #1604.227 for the full wave
+
+#TEST

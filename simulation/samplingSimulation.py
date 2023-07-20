@@ -26,3 +26,5 @@ def calc_wave_BCM():
         BCM_storage.append(read_current_amplitude(time2))
         time2 = time2 + (1 / BCM_resolution)
         time1 = time1 + 1
+
+#TEST

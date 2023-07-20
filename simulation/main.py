@@ -46,3 +46,5 @@ axs[1].plot(BCM_storage)
 axs[1].set_title('BCM')
 
 plt.show()
+
+#TEST

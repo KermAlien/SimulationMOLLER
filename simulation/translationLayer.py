@@ -58,3 +58,5 @@ BCM_resolution = constants.BCM_resolution
 #timer:
 timer_lower_bound = constants.timer_lower_bound
 timer_upper_bound = constants.timer_upper_bound
+
+#TEST
