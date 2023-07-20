@@ -30,7 +30,7 @@ generation_resolution = 0.000000001 #resolution with which the wave is generated
 num_of_modules = 3 #number of simulated voltage transistions
 graph_time_interval = 0.0001 #interval for the x-axis on the graph, measured in seconds
 
-BCM_frequency = 10000 #resolution with which the wave is "measured" by the BCM, measured in hertz
+BCM_resolution = 10000 #frequency with which the BCM measures the wave aka samples per second, measured in hertz
 
 #timer
 timer_lower_bound = 0

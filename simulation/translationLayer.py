@@ -53,9 +53,7 @@ graph_time_interval = constants.graph_time_interval #interval for the x-axis on 
 generation_resolution = constants.generation_resolution
 
 #sampling:
-BCM_frequency = constants.BCM_frequency
-
-BCM_angular_frequency = BCM_frequency * (2 * pi)
+BCM_resolution = constants.BCM_resolution
 
 #timer:
 timer_lower_bound = constants.timer_lower_bound
